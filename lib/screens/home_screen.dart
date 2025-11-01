@@ -3,7 +3,7 @@ import 'package:photo_editor/providers/app_image_provider.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -13,7 +13,25 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black12,
+      appBar: AppBar(
+        title: Text("Photo Editor"),
+        leading: CloseButton(
+          onPressed: () {
+            Navigator.of(context).pushReplacementNamed('/');
+          },
+        ),
+        actions: [
+          TextButton(
+            onPressed: (){},
+            child: const Text(
+              "Save",
+              style: TextStyle(
+                color: Colors.white, 
+              ),
+            ),
+          ),
+        ],
+      ),
       body: Center(
         child: Consumer<AppImageProvider>(
           builder: (BuildContext context, value, Widget? child) {
@@ -24,6 +42,54 @@ class _HomeScreenState extends State<HomeScreen> {
               child: CircularProgressIndicator(),
             );
           },
+        ),
+      ),
+      bottomNavigationBar: Container(
+        width: double.infinity,
+        height: 60,
+        color: Colors.blueGrey, // Bottom navigation bar color
+        child: SafeArea(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                _bottomBatItem(
+                  Icons.crop_rotate_sharp, 
+                  "Crop", 
+                  onPress: () {
+                    Navigator.of(context).pushNamed('/crop');
+                  }
+                ),
+              ]
+            ),
+          ),
+        )
+      ),
+    );
+  }
+
+  Widget _bottomBatItem(IconData icon, String title, {required onPress}) {
+    return InkWell(
+      onTap: () {
+        onPress();
+      }, 
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 15),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon, 
+              color: Colors.white,
+            ),
+            const SizedBox(height: 3),
+            Text(
+              title, 
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ],
         ),
       ),
     );

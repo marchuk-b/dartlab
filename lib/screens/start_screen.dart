@@ -33,7 +33,7 @@ class _StartScreenState extends State<StartScreen> {
               child: Text(
                 "Photo Editor", 
                 style: TextStyle(
-                  color: Colors.black,
+                  color: const Color.fromARGB(255, 255, 255, 255),
                   fontSize: 30, 
                   fontWeight: FontWeight.bold,
                   letterSpacing: 5,
@@ -56,7 +56,7 @@ class _StartScreenState extends State<StartScreen> {
                     onPressed: () {
                       AppImagePicker(source: ImageSource.gallery)
                         .pick(onPick: (File? image){
-                          imageProvider.changeImage(image!);
+                          imageProvider.changeImageFile(image!);
                           Navigator.of(context).pushReplacementNamed('/home');
                         }
                       );
@@ -67,7 +67,7 @@ class _StartScreenState extends State<StartScreen> {
                     onPressed: () {
                       AppImagePicker(source: ImageSource.camera)
                         .pick(onPick: (File? image){
-                          imageProvider.changeImage(image!);
+                          imageProvider.changeImageFile(image!);
                           Navigator.of(context).pushReplacementNamed('/home');
                         }
                       );
