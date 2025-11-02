@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       bottomNavigationBar: Container(
         width: double.infinity,
-        height: 60,
+        height: 80,
         color: Colors.blueGrey, // Bottom navigation bar color
         child: SafeArea(
           child: SingleChildScrollView(
@@ -65,6 +65,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   "Filters", 
                   onPress: () {
                     Navigator.of(context).pushNamed('/filter');
+                  }
+                ),
+                _bottomBatItem(
+                  Icons.tune_outlined, 
+                  "Adjust", 
+                  onPress: () {
+                    Navigator.of(context).pushNamed('/adjust');
                   }
                 ),
               ]

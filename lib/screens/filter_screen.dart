@@ -52,7 +52,7 @@ class _FilterScreenState extends State<FilterScreen> {
             if (value.currentImage != null) {
               return Screenshot(
                 controller: screenshotController,
-                  child: ColorFiltered(
+                child: ColorFiltered(
                   colorFilter: ColorFilter.matrix(currentFilter.matrix),
                   child: Image.memory(value.currentImage!),
                 ),
@@ -66,7 +66,7 @@ class _FilterScreenState extends State<FilterScreen> {
       ),
       bottomNavigationBar: Container(
         width: double.infinity,
-        height: 100,
+        height: 110,
         color: Colors.blueGrey, // Bottom navigation bar color
         child: SafeArea(
           child: Consumer<AppImageProvider>(
