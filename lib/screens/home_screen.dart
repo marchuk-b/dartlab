@@ -89,10 +89,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   }
                 ),
                 _bottomBatItem(
-                  Icons.water_drop, 
+                  Icons.lens_blur, 
                   "Blur", 
                   onPress: () {
                     Navigator.of(context).pushNamed('/blur');
+                  }
+                ),
+                _bottomBatItem(
+                  Icons.emoji_emotions, 
+                  "Stickers", 
+                  onPress: () {
+                    Navigator.of(context).pushNamed('/sticker');
                   }
                 ),
               ]

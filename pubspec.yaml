@@ -14,6 +14,7 @@ dependencies:
     sdk: flutter
   flutter_colorpicker: ^1.1.0
   image_picker: ^1.2.0
+  lindi_sticker_widget: ^0.0.4
   pixel_color_picker: ^1.0.0
   provider: ^6.1.5+1
   screenshot: ^3.0.0
@@ -30,3 +31,4 @@ flutter:
     - assets/
     - assets/textures/
     - assets/images/
+    - assets/stickers/
