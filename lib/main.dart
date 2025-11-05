@@ -6,6 +6,7 @@ import 'package:photo_editor/screens/filter_screen.dart';
 import 'package:photo_editor/screens/fit_screen.dart';
 import 'package:photo_editor/screens/home_screen.dart';
 import 'package:photo_editor/screens/start_screen.dart';
+import 'package:photo_editor/screens/tint_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -42,6 +43,7 @@ class MainApp extends StatelessWidget {
         '/filter': (_) => FilterScreen(),
         '/adjust': (_) => AdjustScreen(),
         '/fit': (_) => FitScreen(),
+        '/tint': (_) => TintScreen(),
       },
       initialRoute: '/',
     );
