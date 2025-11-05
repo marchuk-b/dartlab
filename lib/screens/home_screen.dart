@@ -88,6 +88,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.of(context).pushNamed('/tint');
                   }
                 ),
+                _bottomBatItem(
+                  Icons.water_drop, 
+                  "Blur", 
+                  onPress: () {
+                    Navigator.of(context).pushNamed('/blur');
+                  }
+                ),
               ]
             ),
           ),
