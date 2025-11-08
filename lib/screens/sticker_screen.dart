@@ -132,7 +132,7 @@ class _StickerScreenState extends State<StickerScreen> {
     );
   }
 
-  Widget _bottomBatItem(int idx, String icon, {Color? color, required onPress}) {
+  Widget _bottomBatItem(int idx, String icon, {required onPress}) {
     return InkWell(
       onTap: () {
         onPress();

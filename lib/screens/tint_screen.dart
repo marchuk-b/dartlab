@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:photo_editor/helper/cons.dart';
 import 'package:photo_editor/helper/tints.dart';
 import 'package:photo_editor/model/tint.dart';
 import 'package:photo_editor/providers/app_image_provider.dart';
