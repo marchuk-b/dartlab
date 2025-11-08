@@ -8,6 +8,7 @@ import 'package:photo_editor/screens/fit_screen.dart';
 import 'package:photo_editor/screens/home_screen.dart';
 import 'package:photo_editor/screens/start_screen.dart';
 import 'package:photo_editor/screens/sticker_screen.dart';
+import 'package:photo_editor/screens/text_screen.dart';
 import 'package:photo_editor/screens/tint_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -26,6 +27,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "photo-editor",
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: Colors.black, // Default background color
@@ -48,6 +50,7 @@ class MainApp extends StatelessWidget {
         '/tint': (_) => TintScreen(),
         '/blur': (_) => BlurScreen(),
         '/sticker': (_) => StickerScreen(),
+        '/text': (_) => TextScreen(),
       },
       initialRoute: '/',
     );

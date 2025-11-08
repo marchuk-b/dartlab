@@ -18,6 +18,7 @@ dependencies:
   pixel_color_picker: ^1.0.0
   provider: ^6.1.5+1
   screenshot: ^3.0.0
+  text_editor: ^0.7.0
 
 dev_dependencies:
   flutter_test:
@@ -32,3 +33,38 @@ flutter:
     - assets/textures/
     - assets/images/
     - assets/stickers/
+
+  fonts:
+    - family: AlexBrush
+      fonts:
+        - asset: 'fonts/AlexBrush-Regular.ttf'
+    - family: Allura
+      fonts:
+        - asset: 'fonts/Allura-Regular.ttf'
+    - family: Arizonia
+      fonts:
+        - asset: 'fonts/Arizonia-Regular.ttf'
+    - family: GrandHotel
+      fonts:
+        - asset: 'fonts/GrandHotel-Regular.ttf'
+    - family: GreatVibes
+      fonts:
+        - asset: 'fonts/GreatVibes-Regular.ttf'
+    - family: Lobster
+      fonts:
+        - asset: 'fonts/Lobster-Regular.ttf'
+    - family: OpenSans
+      fonts:
+        - asset: 'fonts/OpenSans-Regular.ttf'
+    - family: Oswald
+      fonts:
+        - asset: 'fonts/Oswald-Regular.ttf'
+    - family: Pacifico
+      fonts:
+        - asset: 'fonts/Pacifico-Regular.ttf'
+    - family: Roboto
+      fonts:
+        - asset: 'fonts/Roboto-Regular.ttf'
+    - family: WindSong
+      fonts:
+        - asset: 'fonts/WindSong-Regular.ttf'
