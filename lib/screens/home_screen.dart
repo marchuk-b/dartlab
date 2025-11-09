@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 import 'package:photo_editor/providers/app_image_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -10,6 +11,29 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+  void _savePhoto() async {
+    final result = await ImageGallerySaverPlus.saveImage(
+      Provider.of<AppImageProvider>(context, listen: false).currentImage!,
+      quality: 100,
+      name: '${DateTime.now().millisecondsSinceEpoch}'
+    );
+    if (!mounted) return;
+    if (result['isSuccess']) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Image saved to Gallery')
+        )
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Something went wrong!')
+        )
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +46,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         actions: [
           TextButton(
-            onPressed: (){},
+            onPressed: (){
+              _savePhoto();
+            },
             child: const Text(
               "Save",
               style: TextStyle(

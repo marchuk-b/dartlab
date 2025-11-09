@@ -13,6 +13,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_colorpicker: ^1.1.0
+  image_gallery_saver_plus: ^4.0.1
   image_picker: ^1.2.0
   lindi_sticker_widget: ^0.1.1
   matrix_gesture_detector: ^0.2.0-nullsafety.1
