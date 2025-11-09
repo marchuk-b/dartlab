@@ -11,10 +11,18 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late AppImageProvider appImageProvider;
+
+  @override
+  void initState() {
+    appImageProvider = Provider.of<AppImageProvider>(context, listen: false);
+    super.initState();
+  }
+
 
   void _savePhoto() async {
     final result = await ImageGallerySaverPlus.saveImage(
-      Provider.of<AppImageProvider>(context, listen: false).currentImage!,
+      appImageProvider.currentImage!,
       quality: 100,
       name: '${DateTime.now().millisecondsSinceEpoch}'
     );
@@ -58,17 +66,56 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: Center(
-        child: Consumer<AppImageProvider>(
-          builder: (BuildContext context, value, Widget? child) {
-            if (value.currentImage != null) {
-              return Image.memory(value.currentImage!);
-            }
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          },
-        ),
+      body: Stack(
+        children: [
+          Center(
+            child: Consumer<AppImageProvider>(
+              builder: (BuildContext context, value, Widget? child) {
+                if (value.currentImage != null) {
+                  return Image.memory(value.currentImage!);
+                }
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
+            ),
+          ),
+          Align(
+            alignment: Alignment.topCenter,
+            child: Container(
+              margin: const EdgeInsets.all(15),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.grey,
+              ),
+              child: Consumer<AppImageProvider>(
+                builder: (context, value, child) {
+                  return Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        onPressed: (){
+                          appImageProvider.undo();
+                        }, 
+                        icon: Icon(Icons.undo, 
+                          color: value.canUndo ? Colors.white : Colors.white10
+                        )
+                      ),
+                      IconButton(
+                        onPressed: (){
+                           appImageProvider.redo();
+                        }, 
+                        icon: Icon(Icons.redo, 
+                          color: value.canRedo ? Colors.white : Colors.white10
+                        )
+                      ),
+                    ],
+                  );
+                }
+              )
+            ),
+          )
+        ],
       ),
       bottomNavigationBar: Container(
         width: double.infinity,
