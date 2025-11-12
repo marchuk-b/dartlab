@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:photo_editor/constants/app_colors.dart';
 import 'package:photo_editor/helper/app_color_picker.dart';
 import 'package:photo_editor/helper/app_image_picker.dart';
 import 'package:photo_editor/helper/pixel_color_image.dart';
@@ -53,7 +54,7 @@ class _FitScreenState extends State<FitScreen> {
     super.initState();
   }
   
-  showActiveWidget({r, b, c, t}){
+  void showActiveWidget({r, b, c, t}){
     showRatio = r != null ? true : false;
     showBlur = b != null ? true : false;
     showColor = c != null ? true : false;
@@ -61,7 +62,7 @@ class _FitScreenState extends State<FitScreen> {
     setState(() {});
   }
 
-  showBackgroundWidget({c, i, t}){
+  void showBackgroundWidget({c, i, t}){
     showColorBackground = c != null ? true : false;
     showImageBackground = i != null ? true : false;
     showTextureBackground = t != null ? true : false;
@@ -145,7 +146,7 @@ class _FitScreenState extends State<FitScreen> {
       bottomNavigationBar: Container(
         width: double.infinity,
         height: 130,
-        color: Colors.blueGrey, // Bottom navigation bar color
+        color: AppColors.bottomBarColor, // Bottom navigation bar color
         child: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -177,7 +178,7 @@ class _FitScreenState extends State<FitScreen> {
                   ),
                   Expanded(
                     child: _bottomBatItem(
-                      Icons.blur_circular, 
+                      Icons.blur_on,
                       "Blur", 
                       onPress: () {
                         showBackgroundWidget(i: true);
@@ -198,7 +199,7 @@ class _FitScreenState extends State<FitScreen> {
                   Expanded(
                     child: _bottomBatItem(
                       Icons.texture, 
-                      "Texture", 
+                      "Texture",
                       onPress: () {
                         showBackgroundWidget(t: true);
                         showActiveWidget(t: true);
@@ -220,19 +221,19 @@ class _FitScreenState extends State<FitScreen> {
         onPress();
       }, 
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15),
+        padding: EdgeInsets.only(top: 10, left: 15, right: 15),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
               icon, 
-              color: color ?? Colors.white,
+              color: color ?? AppColors.iconColor,
             ),
             const SizedBox(height: 3),
             Text(
               title, 
               style: TextStyle(
-                color: color ?? Colors.white70,
+                color: color ?? AppColors.textSecondary,
               ),
             ),
           ],
@@ -243,7 +244,7 @@ class _FitScreenState extends State<FitScreen> {
 
   Widget ratioWidget() {
     return Container(
-      color: const Color.fromARGB(255, 123, 159, 178),
+      color: AppColors.secondaryColor,
       child: Stack(
         children: [
           SingleChildScrollView(
@@ -257,7 +258,9 @@ class _FitScreenState extends State<FitScreen> {
                       y = 1;
                     });
                   }, 
-                  child: Text("1:1")
+                  child: Text("1:1",
+                    style: TextStyle(color: AppColors.textPrimary),
+                  )
                 ),
                 TextButton(
                   onPressed: (){
@@ -266,7 +269,9 @@ class _FitScreenState extends State<FitScreen> {
                       y = 2;
                     });
                   },  
-                  child: Text("1:2")
+                  child: Text("1:2",
+                    style: TextStyle(color: AppColors.textPrimary),
+                  )
                 ),
                 TextButton(
                   onPressed: (){
@@ -275,7 +280,9 @@ class _FitScreenState extends State<FitScreen> {
                       y = 1;
                     });
                   },  
-                  child: Text("2:1")
+                  child: Text("2:1",
+                    style: TextStyle(color: AppColors.textPrimary),
+                  )
                 ),
                 TextButton(
                   onPressed: (){
@@ -284,7 +291,9 @@ class _FitScreenState extends State<FitScreen> {
                       y = 4;
                     });
                   },  
-                  child: Text("3:4")
+                  child: Text("3:4",
+                    style: TextStyle(color: AppColors.textPrimary),
+                  )
                 ),
                 TextButton(
                   onPressed: (){
@@ -293,7 +302,9 @@ class _FitScreenState extends State<FitScreen> {
                       y = 3;
                     });
                   },  
-                  child: Text("4:3")
+                  child: Text("4:3",
+                    style: TextStyle(color: AppColors.textPrimary),
+                  )
                 ),
                 TextButton(
                   onPressed: (){
@@ -302,7 +313,9 @@ class _FitScreenState extends State<FitScreen> {
                       y = 5;
                     });
                   },  
-                  child: Text("4:5")
+                  child: Text("4:5",
+                    style: TextStyle(color: AppColors.textPrimary),
+                  )
                 ),
                 TextButton(
                   onPressed: (){
@@ -310,8 +323,10 @@ class _FitScreenState extends State<FitScreen> {
                       x = 5;
                       y = 4;
                     });
-                  },  
-                  child: Text("5:4")
+                  },
+                  child: Text("5:4",
+                    style: TextStyle(color: AppColors.textPrimary),
+                  )
                 ),
                 TextButton(
                   onPressed: (){
@@ -320,7 +335,9 @@ class _FitScreenState extends State<FitScreen> {
                       y = 9;
                     });
                   },  
-                  child: Text("16:9")
+                  child: Text("16:9",
+                    style: TextStyle(color: AppColors.textPrimary),
+                  )
                 ),
                 TextButton(
                   onPressed: (){
@@ -329,11 +346,12 @@ class _FitScreenState extends State<FitScreen> {
                       y = 16;
                     });
                   },  
-                  child: Text("9:16")
+                  child: Text("9:16",
+                    style: TextStyle(color: AppColors.textPrimary),
+                  )
                 ),
               ],
             ),
-            
           ),
         ],
       ),
@@ -342,7 +360,7 @@ class _FitScreenState extends State<FitScreen> {
 
   Widget blurWidget() {
     return Container(
-      color: Colors.black,
+      color: AppColors.secondaryColor,
       child: Center(
         child: Row(
           children: [
@@ -356,12 +374,12 @@ class _FitScreenState extends State<FitScreen> {
               }, 
               icon: Icon(
                 Icons.photo_library_outlined, 
-                color: Colors.white
+                color: AppColors.iconColor
               )
             ),
             Expanded(
               child: Slider(
-                label: '${blur.toStringAsFixed(2)}',
+                label: blur.toStringAsFixed(2),
                 value: blur, 
                 onChanged: (value){
                   setState(() {
@@ -370,6 +388,7 @@ class _FitScreenState extends State<FitScreen> {
                 },
                 max: 100,
                 min: 0,
+                activeColor: AppColors.activeSlider,
               ),
             ),
           ],
@@ -380,7 +399,7 @@ class _FitScreenState extends State<FitScreen> {
 
   Widget colorWidget() {
     return Container(
-      color: Colors.blueGrey,
+      color: AppColors.secondaryColor,
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -399,7 +418,7 @@ class _FitScreenState extends State<FitScreen> {
               }, 
               icon: Icon(
                 Icons.color_lens, 
-                color: Colors.white
+                color: AppColors.iconColor
               )
             ),
             IconButton(
@@ -417,7 +436,7 @@ class _FitScreenState extends State<FitScreen> {
               }, 
               icon: Icon(
                 Icons.colorize, 
-                color: Colors.white
+                color: AppColors.iconColor
               )
             ),
           ],
@@ -428,7 +447,7 @@ class _FitScreenState extends State<FitScreen> {
 
   Widget textureWidget() {
     return Container(
-      color: Colors.blueGrey,
+      color: AppColors.secondaryColor,
       child: Center(
         child: ListView.builder(
           scrollDirection: Axis.horizontal,

@@ -2,6 +2,7 @@ import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:photo_editor/constants/app_colors.dart';
 import 'package:photo_editor/providers/app_image_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:screenshot/screenshot.dart';
@@ -80,7 +81,7 @@ class _BlurScreenState extends State<BlurScreen> {
                     children: [
                       const Text("X:", 
                         style: TextStyle(
-                          color: Colors.white
+                          color: AppColors.textPrimary
                         ) 
                       ),
                       Expanded(
@@ -99,7 +100,7 @@ class _BlurScreenState extends State<BlurScreen> {
                     children: [
                       const Text("Y: ", 
                         style: TextStyle(
-                          color: Colors.white
+                          color: AppColors.textPrimary
                         ) 
                       ),
                       Expanded(
@@ -123,15 +124,16 @@ class _BlurScreenState extends State<BlurScreen> {
       bottomNavigationBar: Container(
         width: double.infinity,
         height: 80,
-        color: Colors.blueGrey, // Bottom navigation bar color
+        color: AppColors.bottomBarColor,
         child: SafeArea(
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 _bottomBatItem(
                   "Decal", 
-                  color: tileMode == TileMode.decal ? Colors.deepPurple : null,
+                  color: tileMode == TileMode.decal ? AppColors.activeButton : null,
                   onPress: () {
                     setState(() {
                       tileMode = TileMode.decal;
@@ -140,7 +142,7 @@ class _BlurScreenState extends State<BlurScreen> {
                 ),
                 _bottomBatItem(
                   "Clamp", 
-                  color: tileMode == TileMode.clamp ? Colors.deepPurple : null,
+                  color: tileMode == TileMode.clamp ? AppColors.activeButton : null,
                   onPress: () {
                     setState(() {
                       tileMode = TileMode.clamp;
@@ -149,7 +151,7 @@ class _BlurScreenState extends State<BlurScreen> {
                 ),
                 _bottomBatItem(
                   "Mirror", 
-                  color: tileMode == TileMode.mirror ? Colors.deepPurple : null,
+                  color: tileMode == TileMode.mirror ? AppColors.activeButton : null,
                   onPress: () {
                     setState(() {
                       tileMode = TileMode.mirror;
@@ -158,7 +160,7 @@ class _BlurScreenState extends State<BlurScreen> {
                 ),
                 _bottomBatItem(
                   "Repeated", 
-                  color: tileMode == TileMode.repeated ? Colors.deepPurple : null,
+                  color: tileMode == TileMode.repeated ? AppColors.activeButton : null,
                   onPress: () {
                     setState(() {
                       tileMode = TileMode.repeated;
@@ -186,7 +188,7 @@ class _BlurScreenState extends State<BlurScreen> {
             Text(
               title, 
               style: TextStyle(
-                color: color ?? Colors.white70,
+                color: color ?? AppColors.textSecondary,
               ),
             ),
           ],
@@ -202,6 +204,7 @@ class _BlurScreenState extends State<BlurScreen> {
       onChanged: onChanged,
       max: 10.0,
       min: 0.0,
+      activeColor: AppColors.activeSlider,
     );
   }
 }

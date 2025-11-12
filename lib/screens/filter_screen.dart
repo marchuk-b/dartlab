@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:photo_editor/constants/app_colors.dart';
 import 'package:photo_editor/helper/filters.dart';
 import 'package:photo_editor/model/filter.dart';
 import 'package:photo_editor/providers/app_image_provider.dart';
@@ -67,7 +68,7 @@ class _FilterScreenState extends State<FilterScreen> {
       bottomNavigationBar: Container(
         width: double.infinity,
         height: 110,
-        color: Colors.blueGrey, // Bottom navigation bar color
+        color: AppColors.bottomBarColor,
         child: SafeArea(
           child: Consumer<AppImageProvider>(
             builder:(BuildContext context, value, Widget? child){
@@ -107,7 +108,7 @@ class _FilterScreenState extends State<FilterScreen> {
                         Text(
                           filter.filterName, 
                           style: const TextStyle(
-                            color: Colors.white
+                            color: AppColors.textPrimary
                           ),
                         ),
                       ],

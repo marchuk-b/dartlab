@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:photo_editor/constants/app_colors.dart';
 import 'package:photo_editor/helper/tints.dart';
 import 'package:photo_editor/model/tint.dart';
 import 'package:photo_editor/providers/app_image_provider.dart';
@@ -87,7 +88,7 @@ class _TintScreenState extends State<TintScreen> {
       bottomNavigationBar: Container(
         width: double.infinity,
         height: 80,
-        color: Colors.blueGrey, // Bottom navigation bar color
+        color: AppColors.bottomBarColor,
         child: SafeArea(
           child: ListView.builder(
             shrinkWrap: true,
@@ -133,6 +134,7 @@ class _TintScreenState extends State<TintScreen> {
       onChanged: onChanged,
       max: 1.0,
       min: 0.0,
+      activeColor: AppColors.activeSlider,
     );
   }
 }

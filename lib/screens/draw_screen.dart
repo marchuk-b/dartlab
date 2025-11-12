@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:painter/painter.dart';
+import 'package:photo_editor/constants/app_colors.dart';
 import 'package:photo_editor/helper/app_color_picker.dart';
 import 'package:photo_editor/helper/pixel_color_image.dart';
 import 'package:photo_editor/providers/app_image_provider.dart';
@@ -82,7 +83,7 @@ class _DrawScreenState extends State<DrawScreen> {
                 children: [
                   Row(
                     children: [
-                      Container(
+                      SizedBox(
                         width: 20,
                         child: Center(
                           child: Icon(
@@ -113,7 +114,7 @@ class _DrawScreenState extends State<DrawScreen> {
       bottomNavigationBar: Container(
         width: double.infinity,
         height: 80,
-        color: Colors.blueGrey, // Bottom navigation bar color
+        color: AppColors.bottomBarColor, // Bottom navigation bar color
         child: SafeArea(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -194,6 +195,7 @@ class _DrawScreenState extends State<DrawScreen> {
       onChanged: onChanged,
       max: 20,
       min: 1,
+      activeColor: AppColors.activeSlider,
     );
   }
 
@@ -209,7 +211,7 @@ class _DrawScreenState extends State<DrawScreen> {
           children: [
             Icon(
               icon, 
-              color: Colors.white,
+              color: AppColors.iconColor,
             ),
           ],
         ),

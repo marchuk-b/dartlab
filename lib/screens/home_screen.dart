@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
+import 'package:photo_editor/constants/app_colors.dart';
 import 'package:photo_editor/providers/app_image_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -18,7 +19,6 @@ class _HomeScreenState extends State<HomeScreen> {
     appImageProvider = Provider.of<AppImageProvider>(context, listen: false);
     super.initState();
   }
-
 
   void _savePhoto() async {
     final result = await ImageGallerySaverPlus.saveImage(
@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: const Text(
               "Save",
               style: TextStyle(
-                color: Colors.white, 
+                color: AppColors.textPrimary,
               ),
             ),
           ),
@@ -86,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
               margin: const EdgeInsets.all(15),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Colors.grey,
+                color: AppColors.secondaryColor,
               ),
               child: Consumer<AppImageProvider>(
                 builder: (context, value, child) {
@@ -119,10 +119,11 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       bottomNavigationBar: Container(
         width: double.infinity,
-        height: 80,
-        color: Colors.blueGrey, // Bottom navigation bar color
+        height: 90,
+        color: AppColors.bottomBarColor,
         child: SafeArea(
           child: SingleChildScrollView(
+            padding: EdgeInsetsGeometry.directional(top: 7),
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
@@ -216,13 +217,13 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Icon(
               icon, 
-              color: Colors.white,
+              color: AppColors.textPrimary,
             ),
             const SizedBox(height: 3),
             Text(
               title, 
               style: TextStyle(
-                color: Colors.white,
+                color: AppColors.textPrimary,
               ),
             ),
           ],

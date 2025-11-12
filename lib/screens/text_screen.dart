@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:lindi_sticker_widget/lindi_controller.dart';
 import 'package:lindi_sticker_widget/lindi_sticker_widget.dart';
+import 'package:photo_editor/constants/app_colors.dart';
 import 'package:photo_editor/helper/fonts.dart';
 import 'package:photo_editor/providers/app_image_provider.dart';
 import 'package:provider/provider.dart';
@@ -63,26 +64,28 @@ class _TextScreenState extends State<TextScreen> {
           ),
           bottomNavigationBar: Container(
             width: double.infinity,
-            height: 50,
-            color: Colors.black,
-            child: Center(
-              child: TextButton(
-                onPressed: (){
-                  setState(() {
-                    showEditor = true;
-                  });
-                },
-                child: const Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.add, color: Colors.white,),
-                    Text('Add Text',
-                      style: TextStyle(
-                          color: Colors.white
-                      ),
-                    )
-                  ],
-                )
+            height: 80,
+            color: AppColors.bottomBarColor,
+            child: SafeArea(
+              child: Center(
+                child: TextButton(
+                  onPressed: (){
+                    setState(() {
+                      showEditor = true;
+                    });
+                  },
+                  child: const Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.add, color: Colors.white,),
+                      Text('Add Text',
+                        style: TextStyle(
+                            color: Colors.white
+                        ),
+                      )
+                    ],
+                  )
+                ),
               ),
             ),
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:photo_editor/constants/app_colors.dart';
 import 'package:photo_editor/providers/app_image_provider.dart';
 import 'package:photo_editor/screens/adjust_screen.dart';
 import 'package:photo_editor/screens/blur_screen.dart';
@@ -32,11 +33,15 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: Colors.black, // Default background color
+        scaffoldBackgroundColor: AppColors.backgroundColor, // Default background color
         appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.blueGrey, // Default app bar color
+          backgroundColor: AppColors.appBarColor, // Default app bar color
+          foregroundColor: AppColors.textPrimary,
           centerTitle: true,
           elevation: 0,
+        ),
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          backgroundColor: AppColors.secondaryColor,
         ),
         sliderTheme: const SliderThemeData(
           showValueIndicator: ShowValueIndicator.onDrag, 

@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:photo_editor/constants/app_colors.dart';
 import 'package:photo_editor/helper/shapes.dart';
 import 'package:photo_editor/providers/app_image_provider.dart';
 import 'package:photo_editor/widgets/gesture_detector_widget.dart';
@@ -86,67 +87,70 @@ class _MaskScreenState extends State<MaskScreen> {
       ),
       bottomNavigationBar: Container(
         width: double.infinity,
-        height: 110,
-        color: Colors.blueGrey, 
+        height: 120,
+        color: AppColors.bottomBarColor,
         child: SafeArea(
           child: Column(
             children: [
               SingleChildScrollView(
-                child: Row(
-                  children: [
-                    TextButton(
-                      onPressed: (){
-                        setState(() {
-                          opacity = 1;
-                          blendmode = BlendMode.dst;
-                        });
-                      }, 
-                      child: Text('DstIn', 
-                        style: TextStyle(color: Colors.white),
-                      )
-                    ),
-                    TextButton(
-                      onPressed: (){
-                        setState(() {
-                          blendmode = BlendMode.overlay;
-                        });
-                      }, 
-                      child: Text('Overlay', 
-                        style: TextStyle(color: Colors.white),
-                      )
-                    ),
-                    TextButton(
-                      onPressed: (){
-                        setState(() {
-                          blendmode = BlendMode.screen;
-                          opacity = .7;
-                        });
-                      }, 
-                      child: Text('Screen', 
-                        style: TextStyle(color: Colors.white),
-                      )
-                    ),
-                    TextButton(
-                      onPressed: (){
-                        setState(() {
-                          blendmode = BlendMode.saturation;
-                        });
-                      }, 
-                      child: Text('Saturation', 
-                        style: TextStyle(color: Colors.white),
-                      )
-                    ),
-                    TextButton(
-                      onPressed: (){
-                        setState(() {
-                          blendmode = BlendMode.difference;
-                        });
-                      }, 
-                      child: Text('Difference', 
-                        style: TextStyle(color: Colors.white),
-                      )
-                    ),
-                  ],
+                child: Container(
+                  color: AppColors.secondaryColor,
+                  child: Row(
+                    children: [
+                      TextButton(
+                        onPressed: (){
+                          setState(() {
+                            opacity = 1;
+                            blendmode = BlendMode.dst;
+                          });
+                        },
+                        child: Text('DstIn',
+                          style: TextStyle(color: AppColors.textPrimary),
+                        )
+                      ),
+                      TextButton(
+                        onPressed: (){
+                          setState(() {
+                            blendmode = BlendMode.overlay;
+                          });
+                        },
+                        child: Text('Overlay',
+                          style: TextStyle(color: AppColors.textPrimary),
+                        )
+                      ),
+                      TextButton(
+                        onPressed: (){
+                          setState(() {
+                            blendmode = BlendMode.screen;
+                            opacity = .7;
+                          });
+                        },
+                        child: Text('Screen',
+                          style: TextStyle(color: AppColors.textPrimary),
+                        )
+                      ),
+                      TextButton(
+                        onPressed: (){
+                          setState(() {
+                            blendmode = BlendMode.saturation;
+                          });
+                        },
+                        child: Text('Saturation',
+                          style: TextStyle(color: AppColors.textPrimary),
+                        )
+                      ),
+                      TextButton(
+                        onPressed: (){
+                          setState(() {
+                            blendmode = BlendMode.difference;
+                          });
+                        },
+                        child: Text('Difference',
+                          style: TextStyle(color: AppColors.textPrimary),
+                        )
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Expanded(
@@ -181,13 +185,13 @@ class _MaskScreenState extends State<MaskScreen> {
         onPress();
       }, 
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: EdgeInsets.only(top: 7, left: 10, right: 10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Icon(icon, size: 40, color: Colors.white,),
+              child: Icon(icon, size: 40, color: AppColors.iconColor,),
             )
           ],
         ),

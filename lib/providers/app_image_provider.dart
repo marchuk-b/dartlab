@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class AppImageProvider extends ChangeNotifier {
   Uint8List? _currentImage;
 
-  List<Uint8List> _images = [];
+  final List<Uint8List> _images = [];
   int _index = 0;
 
   bool canUndo = true;

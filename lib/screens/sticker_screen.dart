@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:lindi_sticker_widget/lindi_controller.dart';
 import 'package:lindi_sticker_widget/lindi_sticker_widget.dart';
+import 'package:photo_editor/constants/app_colors.dart';
 import 'package:photo_editor/helper/stickers.dart';
 import 'package:photo_editor/providers/app_image_provider.dart';
 import 'package:provider/provider.dart';
@@ -66,13 +67,13 @@ class _StickerScreenState extends State<StickerScreen> {
       bottomNavigationBar: Container(
         width: double.infinity,
         height: 140,
-        color: Colors.blueGrey, 
+        color: AppColors.bottomBarColor,
         child: SafeArea(
           child: Column(
             children: [
               Expanded(
                 child: Container(
-                  color: Colors.blue,
+                  color: AppColors.secondaryColor,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: Stickers().list()[index].length,

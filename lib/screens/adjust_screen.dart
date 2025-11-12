@@ -2,6 +2,7 @@ import 'dart:typed_data';
 import 'package:colorfilter_generator/addons.dart';
 import 'package:colorfilter_generator/colorfilter_generator.dart';
 import 'package:flutter/material.dart';
+import 'package:photo_editor/constants/app_colors.dart';
 import 'package:photo_editor/providers/app_image_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:screenshot/screenshot.dart';
@@ -37,7 +38,7 @@ class _AdjustScreenState extends State<AdjustScreen> {
   bool showHue = false;
   bool showSepia = false;
 
-  adjust({b, s, c, h, se}){
+  void adjust({b, s, c, h, se}){
     adj = ColorFilterGenerator(
       name: "Adjust", 
       filters: [
@@ -50,7 +51,7 @@ class _AdjustScreenState extends State<AdjustScreen> {
     );
   }
 
-  showSlider({b, s, c, h, se}) {
+  void showSlider({b, s, c, h, se}) {
     setState(() {
       showBrightness = b ?? false;  
       showContrast = c ?? false;  
@@ -182,7 +183,7 @@ class _AdjustScreenState extends State<AdjustScreen> {
                   }, 
                   child: const Text("Reset",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: AppColors.textPrimary,
                     ),
                   )
                 ),
@@ -194,7 +195,7 @@ class _AdjustScreenState extends State<AdjustScreen> {
       bottomNavigationBar: Container(
         width: double.infinity,
         height: 80,
-        color: Colors.blueGrey, // Bottom navigation bar color
+        color: AppColors.bottomBarColor, // Bottom navigation bar color
         child: SafeArea(
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -203,7 +204,7 @@ class _AdjustScreenState extends State<AdjustScreen> {
                 _bottomBatItem(
                   Icons.brightness_5, 
                   "Brightness", 
-                  color: showBrightness ? Colors.deepPurple : null,
+                  color: showBrightness ? AppColors.activeButton : null,
                   onPress: () {
                     showSlider(b: true);
                   }
@@ -211,7 +212,7 @@ class _AdjustScreenState extends State<AdjustScreen> {
                 _bottomBatItem(
                   Icons.contrast, 
                   "Contrast", 
-                  color: showContrast ? Colors.deepPurple : null,
+                  color: showContrast ? AppColors.activeButton : null,
                   onPress: () {
                     showSlider(c: true);
                   }
@@ -219,7 +220,7 @@ class _AdjustScreenState extends State<AdjustScreen> {
                 _bottomBatItem(
                   Icons.filter_tilt_shift, 
                   "Saturation",
-                  color: showSaturation? Colors.deepPurple : null, 
+                  color: showSaturation? AppColors.activeButton : null, 
                   onPress: () {
                     showSlider(s: true);
                   }
@@ -227,7 +228,7 @@ class _AdjustScreenState extends State<AdjustScreen> {
                 _bottomBatItem(
                   Icons.water_drop, 
                   "Hue", 
-                  color: showHue ? Colors.deepPurple : null,
+                  color: showHue ? AppColors.activeButton : null,
                   onPress: () {
                     showSlider(h: true);
                   }
@@ -235,7 +236,7 @@ class _AdjustScreenState extends State<AdjustScreen> {
                 _bottomBatItem(
                   Icons.motion_photos_on, 
                   "Sepia", 
-                  color: showSepia ? Colors.deepPurple : null,
+                  color: showSepia ? AppColors.activeButton : null,
                   onPress: () {
                     showSlider(se: true);
                   }
@@ -260,13 +261,13 @@ class _AdjustScreenState extends State<AdjustScreen> {
           children: [
             Icon(
               icon, 
-              color: color ?? Colors.white,
+              color: color ?? AppColors.iconColor,
             ),
             const SizedBox(height: 3),
             Text(
               title, 
               style: TextStyle(
-                color: color ?? Colors.white70,
+                color: color ?? AppColors.textSecondary,
               ),
             ),
           ],
@@ -282,6 +283,7 @@ class _AdjustScreenState extends State<AdjustScreen> {
       onChanged: onChanged,
       max: 1,
       min: -0.9,
+      activeColor: AppColors.activeSlider,
     );
   }
 }
