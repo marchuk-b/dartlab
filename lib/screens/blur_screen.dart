@@ -32,8 +32,8 @@ class _BlurScreenState extends State<BlurScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: CloseButton(),
-        title: Text("Blur"),
+        leading: BackButton(),
+        // title: Text("Blur"),
         actions: [
           IconButton(
             onPressed: () async{

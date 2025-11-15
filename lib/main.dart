@@ -43,6 +43,11 @@ class MainApp extends StatelessWidget {
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           backgroundColor: AppColors.secondaryColor,
         ),
+        textTheme: const TextTheme(
+          bodyLarge: TextStyle(fontFamily: 'Rubik'),
+          bodyMedium: TextStyle(fontFamily: 'Rubik'),
+          titleLarge: TextStyle(fontFamily: 'Rubik'),
+        ),
         sliderTheme: const SliderThemeData(
           showValueIndicator: ShowValueIndicator.onDrag, 
         ),

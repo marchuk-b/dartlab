@@ -65,8 +65,8 @@ class _AdjustScreenState extends State<AdjustScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: CloseButton(),
-        title: Text("Adjust"),
+        leading: BackButton(),
+        // title: Text("Adjust"),
         actions: [
           IconButton(
             onPressed: () async{

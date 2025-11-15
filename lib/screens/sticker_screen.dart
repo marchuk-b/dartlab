@@ -31,8 +31,8 @@ class _StickerScreenState extends State<StickerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: CloseButton(),
-        title: Text("Sticker"),
+        leading: BackButton(),
+        // title: Text("Sticker"),
         actions: [
           IconButton(
             onPressed: () async{

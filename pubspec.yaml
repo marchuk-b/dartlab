@@ -28,6 +28,12 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.11.0
+
+flutter_launcher_icons:
+    android: true
+    ios: true
+    image_path: "assets/images/logo.png"
 
 flutter:
   uses-material-design: true
@@ -72,3 +78,6 @@ flutter:
     - family: WindSong
       fonts:
         - asset: 'fonts/WindSong-Regular.ttf'
+    - family: Rubik
+      fonts:
+        - asset: 'fonts/Rubik-Regular.ttf'

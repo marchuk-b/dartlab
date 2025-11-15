@@ -33,8 +33,8 @@ class _TintScreenState extends State<TintScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: CloseButton(),
-        title: Text("Tint"),
+        leading: BackButton(),
+        // title: Text("Tint"),
         actions: [
           IconButton(
             onPressed: () async{

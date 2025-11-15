@@ -31,8 +31,8 @@ class _CropScreenState extends State<CropScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: CloseButton(),
-        title: Text("Crop"),
+        leading: BackButton(),
+        // title: Text("Crop"),
         actions: [
           IconButton(
             onPressed: () async{

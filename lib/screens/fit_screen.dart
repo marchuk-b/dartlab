@@ -73,8 +73,8 @@ class _FitScreenState extends State<FitScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: CloseButton(),
-        title: Text("Fit"),
+        leading: BackButton(),
+        // title: Text("Fit"),
         actions: [
           IconButton(
             onPressed: () async{

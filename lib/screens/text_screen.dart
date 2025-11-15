@@ -33,8 +33,8 @@ class _TextScreenState extends State<TextScreen> {
       children: [
         Scaffold(
           appBar: AppBar(
-            leading: CloseButton(),
-            title: Text("Text"),
+            leading: BackButton(),
+            // title: Text("Text"),
             actions: [
               IconButton(
                   onPressed: () async{

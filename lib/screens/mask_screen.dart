@@ -37,8 +37,8 @@ class _MaskScreenState extends State<MaskScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: CloseButton(),
-        title: Text("Mask"),
+        leading: BackButton(),
+        // title: Text("Mask"),
         actions: [
           IconButton(
             onPressed: () async{

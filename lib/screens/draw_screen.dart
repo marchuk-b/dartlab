@@ -35,8 +35,8 @@ class _DrawScreenState extends State<DrawScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: CloseButton(),
-        title: Text("Draw"),
+        leading: BackButton(),
+        // title: Text("Draw"),
         actions: [
           IconButton(
             onPressed: () async{

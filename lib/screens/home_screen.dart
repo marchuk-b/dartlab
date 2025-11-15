@@ -46,8 +46,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Photo Editor"),
-        leading: CloseButton(
+        // title: Text("Photo Editor"),
+        leading: BackButton(
           onPressed: () {
             Navigator.of(context).pushReplacementNamed('/');
           },

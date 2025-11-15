@@ -33,8 +33,8 @@ class _FilterScreenState extends State<FilterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: CloseButton(),
-        title: Text("Filters"),
+        leading: BackButton(),
+        // title: Text("Filters"),
         actions: [
           IconButton(
             onPressed: () async{

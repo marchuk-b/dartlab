@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 
 class AppImageProvider extends ChangeNotifier {
+  
   Uint8List? _currentImage;
 
   final List<Uint8List> _images = [];
