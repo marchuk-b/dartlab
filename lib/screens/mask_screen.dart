@@ -91,7 +91,7 @@ class _MaskScreenState extends State<MaskScreen> {
       ),
       bottomNavigationBar: Container(
         width: double.infinity,
-        height: 120,
+        height: 110,
         color: AppColors.bottomBarColor(isDark),
         child: SafeArea(
           child: Column(
@@ -99,61 +99,65 @@ class _MaskScreenState extends State<MaskScreen> {
               SingleChildScrollView(
                 child: Container(
                   color: AppColors.secondaryColor(isDark),
-                  child: Row(
-                    children: [
-                      TextButton(
-                        onPressed: (){
-                          setState(() {
-                            opacity = 1;
-                            blendmode = BlendMode.dst;
-                          });
-                        },
-                        child: Text('DstIn',
-                          style: TextStyle(color: AppColors.textPrimary(isDark)),
-                        )
-                      ),
-                      TextButton(
-                        onPressed: (){
-                          setState(() {
-                            blendmode = BlendMode.overlay;
-                          });
-                        },
-                        child: Text('Overlay',
-                          style: TextStyle(color: AppColors.textPrimary(isDark)),
-                        )
-                      ),
-                      TextButton(
-                        onPressed: (){
-                          setState(() {
-                            blendmode = BlendMode.screen;
-                            opacity = .7;
-                          });
-                        },
-                        child: Text('Screen',
-                          style: TextStyle(color: AppColors.textPrimary(isDark)),
-                        )
-                      ),
-                      TextButton(
-                        onPressed: (){
-                          setState(() {
-                            blendmode = BlendMode.saturation;
-                          });
-                        },
-                        child: Text('Saturation',
-                          style: TextStyle(color: AppColors.textPrimary(isDark)),
-                        )
-                      ),
-                      TextButton(
-                        onPressed: (){
-                          setState(() {
-                            blendmode = BlendMode.difference;
-                          });
-                        },
-                        child: Text('Difference',
-                          style: TextStyle(color: AppColors.textPrimary(isDark)),
-                        )
-                      ),
-                    ],
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center, 
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        TextButton(
+                          onPressed: (){
+                            setState(() {
+                              opacity = 1;
+                              blendmode = BlendMode.dst;
+                            });
+                          },
+                          child: Text('DstIn',
+                            style: TextStyle(color: AppColors.textPrimary(isDark)),
+                          )
+                        ),
+                        TextButton(
+                          onPressed: (){
+                            setState(() {
+                              blendmode = BlendMode.overlay;
+                            });
+                          },
+                          child: Text('Overlay',
+                            style: TextStyle(color: AppColors.textPrimary(isDark)),
+                          )
+                        ),
+                        TextButton(
+                          onPressed: (){
+                            setState(() {
+                              blendmode = BlendMode.screen;
+                              opacity = .7;
+                            });
+                          },
+                          child: Text('Screen',
+                            style: TextStyle(color: AppColors.textPrimary(isDark)),
+                          )
+                        ),
+                        TextButton(
+                          onPressed: (){
+                            setState(() {
+                              blendmode = BlendMode.saturation;
+                            });
+                          },
+                          child: Text('Saturation',
+                            style: TextStyle(color: AppColors.textPrimary(isDark)),
+                          )
+                        ),
+                        TextButton(
+                          onPressed: (){
+                            setState(() {
+                              blendmode = BlendMode.difference;
+                            });
+                          },
+                          child: Text('Difference',
+                            style: TextStyle(color: AppColors.textPrimary(isDark)),
+                          )
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -192,7 +196,7 @@ class _MaskScreenState extends State<MaskScreen> {
         onPress();
       }, 
       child: Padding(
-        padding: EdgeInsets.only(top: 7, left: 10, right: 10),
+        padding: EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

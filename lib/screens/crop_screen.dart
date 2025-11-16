@@ -79,138 +79,140 @@ class _CropScreenState extends State<CropScreen> {
         height: 60,
         color: AppColors.bottomBarColor(isDark),
         child: SafeArea(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                _bottomBatItem(
-                  child: Icon(
-                    Icons.rotate_90_degrees_ccw_outlined,
-                    color: AppColors.iconColor(isDark),
-                  ), 
-                  onPress: () {
-                    controller.rotateLeft();
-                  }
-                ),
-                _bottomBatItem(
-                  child: Icon(
-                    Icons.rotate_90_degrees_cw_outlined,
-                    color: AppColors.iconColor(isDark),
-                  ), 
-                  onPress: () { 
-                    controller.rotateRight();
-                  }
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 5),
-                  child: Container(
-                    color: Colors.white70,
-                    width: 1,
-                    height: 20,
+          child: Center(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  _bottomBatItem(
+                    child: Icon(
+                      Icons.rotate_90_degrees_ccw_outlined,
+                      color: AppColors.iconColor(isDark),
+                    ), 
+                    onPress: () {
+                      controller.rotateLeft();
+                    }
                   ),
-                ),
-                _bottomBatItem(
-                  child: Text(
-                    "Free", 
-                    style: TextStyle(color: AppColors.textPrimary(isDark))
-                  ),  
-                  onPress: () {
-                    controller.aspectRatio = null;
-                    controller.crop = const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9);
-                  }
-                ),
-                _bottomBatItem(
-                  child: Text(
-                    "Square", 
-                    style: TextStyle(color: AppColors.textPrimary(isDark))
-                  ),  
-                  onPress: () {
-                    controller.aspectRatio = 1;
-                    controller.crop = const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9);
-                  }
-                ),
-                _bottomBatItem(
-                  child: Text(
-                    "1:2", 
-                    style: TextStyle(color: AppColors.textPrimary(isDark))
-                  ),  
-                  onPress: () {
-                    controller.aspectRatio = 1 / 2;
-                    controller.crop = const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9);
-                  }
-                ),
-                _bottomBatItem(
-                  child: Text(
-                    "3:4", 
-                    style: TextStyle(color: AppColors.textPrimary(isDark))
-                  ),  
-                  onPress: () {
-                    controller.aspectRatio = 3 / 4;
-                    controller.crop = const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9);
-                  }
-                ),
-                _bottomBatItem(
-                  child: Text(
-                    "4:5", 
-                    style: TextStyle(color: AppColors.textPrimary(isDark))
-                  ),  
-                  onPress: () {
-                    controller.aspectRatio = 4 / 5;
-                    controller.crop = const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9);
-                  }
-                ),
-                _bottomBatItem(
-                  child: Text(
-                    "9:16", 
-                    style: TextStyle(color: AppColors.textPrimary(isDark))
-                  ),  
-                  onPress: () {
-                    controller.aspectRatio = 9 / 16;
-                    controller.crop = const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9);
-                  }
-                ),
-
-                _bottomBatItem(
-                  child: Text(
-                    "2:1", 
-                    style: TextStyle(color: AppColors.textPrimary(isDark))
-                  ),  
-                  onPress: () {
-                    controller.aspectRatio = 2 / 1;
-                    controller.crop = const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9);
-                  }
-                ),
-                _bottomBatItem(
-                  child: Text(
-                    "4:3", 
-                    style: TextStyle(color: AppColors.textPrimary(isDark))
-                  ),  
-                  onPress: () {
-                    controller.aspectRatio = 4 / 3;
-                    controller.crop = const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9);
-                  }
-                ),
-                _bottomBatItem(
-                  child: Text(
-                    "5:4", 
-                    style: TextStyle(color: AppColors.textPrimary(isDark))
-                  ),  
-                  onPress: () {
-                    controller.aspectRatio = 5 / 4;
-                    controller.crop = const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9);
-                  }
-                ),
-                _bottomBatItem(
-                  child: Text(
-                    "16:9", 
-                    style: TextStyle(color: AppColors.textPrimary(isDark))
-                  ),  
-                  onPress: () {
-                    controller.aspectRatio = 16 / 9;
-                    controller.crop = const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9);
-                  }
-                ),
-              ]
+                  _bottomBatItem(
+                    child: Icon(
+                      Icons.rotate_90_degrees_cw_outlined,
+                      color: AppColors.iconColor(isDark),
+                    ), 
+                    onPress: () { 
+                      controller.rotateRight();
+                    }
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 5),
+                    child: Container(
+                      color: Colors.white70,
+                      width: 1,
+                      height: 20,
+                    ),
+                  ),
+                  _bottomBatItem(
+                    child: Text(
+                      "Free", 
+                      style: TextStyle(color: AppColors.textPrimary(isDark))
+                    ),  
+                    onPress: () {
+                      controller.aspectRatio = null;
+                      controller.crop = const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9);
+                    }
+                  ),
+                  _bottomBatItem(
+                    child: Text(
+                      "Square", 
+                      style: TextStyle(color: AppColors.textPrimary(isDark))
+                    ),  
+                    onPress: () {
+                      controller.aspectRatio = 1;
+                      controller.crop = const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9);
+                    }
+                  ),
+                  _bottomBatItem(
+                    child: Text(
+                      "1:2", 
+                      style: TextStyle(color: AppColors.textPrimary(isDark))
+                    ),  
+                    onPress: () {
+                      controller.aspectRatio = 1 / 2;
+                      controller.crop = const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9);
+                    }
+                  ),
+                  _bottomBatItem(
+                    child: Text(
+                      "3:4", 
+                      style: TextStyle(color: AppColors.textPrimary(isDark))
+                    ),  
+                    onPress: () {
+                      controller.aspectRatio = 3 / 4;
+                      controller.crop = const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9);
+                    }
+                  ),
+                  _bottomBatItem(
+                    child: Text(
+                      "4:5", 
+                      style: TextStyle(color: AppColors.textPrimary(isDark))
+                    ),  
+                    onPress: () {
+                      controller.aspectRatio = 4 / 5;
+                      controller.crop = const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9);
+                    }
+                  ),
+                  _bottomBatItem(
+                    child: Text(
+                      "9:16", 
+                      style: TextStyle(color: AppColors.textPrimary(isDark))
+                    ),  
+                    onPress: () {
+                      controller.aspectRatio = 9 / 16;
+                      controller.crop = const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9);
+                    }
+                  ),
+            
+                  _bottomBatItem(
+                    child: Text(
+                      "2:1", 
+                      style: TextStyle(color: AppColors.textPrimary(isDark))
+                    ),  
+                    onPress: () {
+                      controller.aspectRatio = 2 / 1;
+                      controller.crop = const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9);
+                    }
+                  ),
+                  _bottomBatItem(
+                    child: Text(
+                      "4:3", 
+                      style: TextStyle(color: AppColors.textPrimary(isDark))
+                    ),  
+                    onPress: () {
+                      controller.aspectRatio = 4 / 3;
+                      controller.crop = const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9);
+                    }
+                  ),
+                  _bottomBatItem(
+                    child: Text(
+                      "5:4", 
+                      style: TextStyle(color: AppColors.textPrimary(isDark))
+                    ),  
+                    onPress: () {
+                      controller.aspectRatio = 5 / 4;
+                      controller.crop = const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9);
+                    }
+                  ),
+                  _bottomBatItem(
+                    child: Text(
+                      "16:9", 
+                      style: TextStyle(color: AppColors.textPrimary(isDark))
+                    ),  
+                    onPress: () {
+                      controller.aspectRatio = 16 / 9;
+                      controller.crop = const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9);
+                    }
+                  ),
+                ]
+              ),
             ),
           ),
         )

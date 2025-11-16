@@ -149,7 +149,7 @@ class _FitScreenState extends State<FitScreen> {
 
       bottomNavigationBar: Container(
         width: double.infinity,
-        height: 130,
+        height: 110,
         color: AppColors.bottomBarColor(isDark), // Bottom navigation bar color
         child: SafeArea(
           child: Column(
@@ -169,48 +169,51 @@ class _FitScreenState extends State<FitScreen> {
                   ],
                 ),
               ),
-              Row(
-                children: [
-                  Expanded(
-                    child: _bottomBatItem(
-                      Icons.aspect_ratio, 
-                      "Ratio", 
-                      onPress: () {
-                        showActiveWidget(r: true);
-                      }
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: _bottomBatItem(
+                        Icons.aspect_ratio, 
+                        "Ratio", 
+                        onPress: () {
+                          showActiveWidget(r: true);
+                        }
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: _bottomBatItem(
-                      Icons.blur_on,
-                      "Blur", 
-                      onPress: () {
-                        showBackgroundWidget(i: true);
-                        showActiveWidget(b: true);
-                      }
+                    Expanded(
+                      child: _bottomBatItem(
+                        Icons.blur_on,
+                        "Blur", 
+                        onPress: () {
+                          showBackgroundWidget(i: true);
+                          showActiveWidget(b: true);
+                        }
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: _bottomBatItem(
-                      Icons.color_lens, 
-                      "Color", 
-                      onPress: () {
-                        showBackgroundWidget(c: true);
-                        showActiveWidget(c: true);
-                      }
+                    Expanded(
+                      child: _bottomBatItem(
+                        Icons.color_lens, 
+                        "Color", 
+                        onPress: () {
+                          showBackgroundWidget(c: true);
+                          showActiveWidget(c: true);
+                        }
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: _bottomBatItem(
-                      Icons.texture, 
-                      "Texture",
-                      onPress: () {
-                        showBackgroundWidget(t: true);
-                        showActiveWidget(t: true);
-                      }
+                    Expanded(
+                      child: _bottomBatItem(
+                        Icons.texture, 
+                        "Texture",
+                        onPress: () {
+                          showBackgroundWidget(t: true);
+                          showActiveWidget(t: true);
+                        }
+                      ),
                     ),
-                  ),
-                ]
+                  ]
+                ),
               ),
             ],
           ),
@@ -255,115 +258,113 @@ class _FitScreenState extends State<FitScreen> {
 
     return Container(
       color: AppColors.secondaryColor(isDark),
-      child: Stack(
-        children: [
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                TextButton(
-                  onPressed: (){
-                    setState(() {
-                      x = 1;
-                      y = 1;
-                    });
-                  }, 
-                  child: Text("1:1",
-                    style: TextStyle(color: AppColors.textPrimary(isDark)),
-                  )
-                ),
-                TextButton(
-                  onPressed: (){
-                    setState(() {
-                      x = 1;
-                      y = 2;
-                    });
-                  },  
-                  child: Text("1:2",
-                    style: TextStyle(color: AppColors.textPrimary(isDark)),
-                  )
-                ),
-                TextButton(
-                  onPressed: (){
-                    setState(() {
-                      x = 2;
-                      y = 1;
-                    });
-                  },  
-                  child: Text("2:1",
-                    style: TextStyle(color: AppColors.textPrimary(isDark)),
-                  )
-                ),
-                TextButton(
-                  onPressed: (){
-                    setState(() {
-                      x = 3;
-                      y = 4;
-                    });
-                  },  
-                  child: Text("3:4",
-                    style: TextStyle(color: AppColors.textPrimary(isDark)),
-                  )
-                ),
-                TextButton(
-                  onPressed: (){
-                    setState(() {
-                      x = 4;
-                      y = 3;
-                    });
-                  },  
-                  child: Text("4:3",
-                    style: TextStyle(color: AppColors.textPrimary(isDark)),
-                  )
-                ),
-                TextButton(
-                  onPressed: (){
-                    setState(() {
-                      x = 4;
-                      y = 5;
-                    });
-                  },  
-                  child: Text("4:5",
-                    style: TextStyle(color: AppColors.textPrimary(isDark)),
-                  )
-                ),
-                TextButton(
-                  onPressed: (){
-                    setState(() {
-                      x = 5;
-                      y = 4;
-                    });
-                  },
-                  child: Text("5:4",
-                    style: TextStyle(color: AppColors.textPrimary(isDark)),
-                  )
-                ),
-                TextButton(
-                  onPressed: (){
-                    setState(() {
-                      x = 16;
-                      y = 9;
-                    });
-                  },  
-                  child: Text("16:9",
-                    style: TextStyle(color: AppColors.textPrimary(isDark)),
-                  )
-                ),
-                TextButton(
-                  onPressed: (){
-                    setState(() {
-                      x = 9;
-                      y = 16;
-                    });
-                  },  
-                  child: Text("9:16",
-                    style: TextStyle(color: AppColors.textPrimary(isDark)),
-                  )
-                ),
-              ],
-            ),
+      child: Center(
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              TextButton(
+                onPressed: (){
+                  setState(() {
+                    x = 1;
+                    y = 1;
+                  });
+                }, 
+                child: Text("1:1",
+                  style: TextStyle(color: AppColors.textPrimary(isDark)),
+                )
+              ),
+              TextButton(
+                onPressed: (){
+                  setState(() {
+                    x = 1;
+                    y = 2;
+                  });
+                },  
+                child: Text("1:2",
+                  style: TextStyle(color: AppColors.textPrimary(isDark)),
+                )
+              ),
+              TextButton(
+                onPressed: (){
+                  setState(() {
+                    x = 2;
+                    y = 1;
+                  });
+                },  
+                child: Text("2:1",
+                  style: TextStyle(color: AppColors.textPrimary(isDark)),
+                )
+              ),
+              TextButton(
+                onPressed: (){
+                  setState(() {
+                    x = 3;
+                    y = 4;
+                  });
+                },  
+                child: Text("3:4",
+                  style: TextStyle(color: AppColors.textPrimary(isDark)),
+                )
+              ),
+              TextButton(
+                onPressed: (){
+                  setState(() {
+                    x = 4;
+                    y = 3;
+                  });
+                },  
+                child: Text("4:3",
+                  style: TextStyle(color: AppColors.textPrimary(isDark)),
+                )
+              ),
+              TextButton(
+                onPressed: (){
+                  setState(() {
+                    x = 4;
+                    y = 5;
+                  });
+                },  
+                child: Text("4:5",
+                  style: TextStyle(color: AppColors.textPrimary(isDark)),
+                )
+              ),
+              TextButton(
+                onPressed: (){
+                  setState(() {
+                    x = 5;
+                    y = 4;
+                  });
+                },
+                child: Text("5:4",
+                  style: TextStyle(color: AppColors.textPrimary(isDark)),
+                )
+              ),
+              TextButton(
+                onPressed: (){
+                  setState(() {
+                    x = 16;
+                    y = 9;
+                  });
+                },  
+                child: Text("16:9",
+                  style: TextStyle(color: AppColors.textPrimary(isDark)),
+                )
+              ),
+              TextButton(
+                onPressed: (){
+                  setState(() {
+                    x = 9;
+                    y = 16;
+                  });
+                },  
+                child: Text("9:16",
+                  style: TextStyle(color: AppColors.textPrimary(isDark)),
+                )
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

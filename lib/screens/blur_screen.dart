@@ -130,48 +130,50 @@ class _BlurScreenState extends State<BlurScreen> {
         height: 80,
         color: AppColors.bottomBarColor(isDark),
         child: SafeArea(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _bottomBatItem(
-                  "Decal", 
-                  color: tileMode == TileMode.decal ? AppColors.activeButton : null,
-                  onPress: () {
-                    setState(() {
-                      tileMode = TileMode.decal;
-                    });
-                  }
-                ),
-                _bottomBatItem(
-                  "Clamp", 
-                  color: tileMode == TileMode.clamp ? AppColors.activeButton : null,
-                  onPress: () {
-                    setState(() {
-                      tileMode = TileMode.clamp;
-                    });
-                  }
-                ),
-                _bottomBatItem(
-                  "Mirror", 
-                  color: tileMode == TileMode.mirror ? AppColors.activeButton : null,
-                  onPress: () {
-                    setState(() {
-                      tileMode = TileMode.mirror;
-                    });
-                  }
-                ),
-                _bottomBatItem(
-                  "Repeated", 
-                  color: tileMode == TileMode.repeated ? AppColors.activeButton : null,
-                  onPress: () {
-                    setState(() {
-                      tileMode = TileMode.repeated;
-                    });
-                  }
-                ),
-              ]
+          child: Center(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  _bottomBatItem(
+                    "Decal", 
+                    color: tileMode == TileMode.decal ? AppColors.activeButton : null,
+                    onPress: () {
+                      setState(() {
+                        tileMode = TileMode.decal;
+                      });
+                    }
+                  ),
+                  _bottomBatItem(
+                    "Clamp", 
+                    color: tileMode == TileMode.clamp ? AppColors.activeButton : null,
+                    onPress: () {
+                      setState(() {
+                        tileMode = TileMode.clamp;
+                      });
+                    }
+                  ),
+                  _bottomBatItem(
+                    "Mirror", 
+                    color: tileMode == TileMode.mirror ? AppColors.activeButton : null,
+                    onPress: () {
+                      setState(() {
+                        tileMode = TileMode.mirror;
+                      });
+                    }
+                  ),
+                  _bottomBatItem(
+                    "Repeated", 
+                    color: tileMode == TileMode.repeated ? AppColors.activeButton : null,
+                    onPress: () {
+                      setState(() {
+                        tileMode = TileMode.repeated;
+                      });
+                    }
+                  ),
+                ]
+              ),
             ),
           ),
         )

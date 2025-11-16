@@ -94,36 +94,38 @@ class _TintScreenState extends State<TintScreen> {
         height: 80,
         color: AppColors.bottomBarColor(isDark),
         child: SafeArea(
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: tints.length,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (BuildContext context, index) {
-              Tint tint = tints[index];
-              return GestureDetector(
-                onTap: (){
-                  setState(() {
-                    this.index = index;
-                  });
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 12,
-                    horizontal: 8
-                  ),
-                  child: CircleAvatar(
-                    backgroundColor: this.index == index 
-                      ? Colors.white : Colors.transparent,
-                    child: Padding(
-                      padding: const EdgeInsets.all(2),
-                      child: CircleAvatar(
-                        backgroundColor: tint.color,
-                      ),
+          child: Center(
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: tints.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (BuildContext context, index) {
+                Tint tint = tints[index];
+                return GestureDetector(
+                  onTap: (){
+                    setState(() {
+                      this.index = index;
+                    });
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 12,
+                      horizontal: 8
                     ),
-                  ), 
-                ),
-              );
-            },
+                    child: CircleAvatar(
+                      backgroundColor: this.index == index 
+                        ? Colors.white : Colors.transparent,
+                      child: Padding(
+                        padding: const EdgeInsets.all(2),
+                        child: CircleAvatar(
+                          backgroundColor: tint.color,
+                        ),
+                      ),
+                    ), 
+                  ),
+                );
+              },
+            ),
           ),
         )
       ),

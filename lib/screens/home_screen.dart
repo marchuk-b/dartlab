@@ -127,82 +127,86 @@ class _HomeScreenState extends State<HomeScreen> {
         height: 90,
         color: AppColors.bottomBarColor(isDark),
         child: SafeArea(
-          child: SingleChildScrollView(
-            padding: EdgeInsetsGeometry.directional(top: 7),
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                _bottomBatItem(
-                  Icons.crop_rotate_sharp, 
-                  "Crop", 
-                  onPress: () {
-                    Navigator.of(context).pushNamed('/crop');
-                  }
+          child: Center(
+            child: SingleChildScrollView(
+              padding: EdgeInsetsGeometry.directional(top: 7),
+              scrollDirection: Axis.horizontal,
+              child: Center(
+                child: Row(
+                  children: [
+                    _bottomBatItem(
+                      Icons.crop_rotate_sharp,
+                      "Crop",
+                      onPress: () {
+                        Navigator.of(context).pushNamed('/crop');
+                      }
+                    ),
+                    _bottomBatItem(
+                      Icons.filter_alt_rounded,
+                      "Filters",
+                      onPress: () {
+                        Navigator.of(context).pushNamed('/filter');
+                      }
+                    ),
+                    _bottomBatItem(
+                      Icons.tune_outlined,
+                      "Adjust",
+                      onPress: () {
+                        Navigator.of(context).pushNamed('/adjust');
+                      }
+                    ),
+                    _bottomBatItem(
+                      Icons.fit_screen,
+                      "Fit",
+                      onPress: () {
+                        Navigator.of(context).pushNamed('/fit');
+                      }
+                    ),
+                    _bottomBatItem(
+                      Icons.water_drop_outlined,
+                      "Tint",
+                      onPress: () {
+                        Navigator.of(context).pushNamed('/tint');
+                      }
+                    ),
+                    _bottomBatItem(
+                      Icons.lens_blur,
+                      "Blur",
+                      onPress: () {
+                        Navigator.of(context).pushNamed('/blur');
+                      }
+                    ),
+                    _bottomBatItem(
+                      Icons.emoji_emotions,
+                      "Stickers",
+                      onPress: () {
+                        Navigator.of(context).pushNamed('/sticker');
+                      }
+                    ),
+                    _bottomBatItem(
+                        Icons.text_fields,
+                        "Text",
+                        onPress: () {
+                          Navigator.of(context).pushNamed('/text');
+                        }
+                    ),
+                    _bottomBatItem(
+                        Icons.draw,
+                        "Draw",
+                        onPress: () {
+                          Navigator.of(context).pushNamed('/draw');
+                        }
+                    ),
+                    _bottomBatItem(
+                        Icons.star_border,
+                        "Mask",
+                        onPress: () {
+                          Navigator.of(context).pushNamed('/mask');
+                        }
+                    ),
+                  ]
                 ),
-                _bottomBatItem(
-                  Icons.filter_alt_rounded, 
-                  "Filters", 
-                  onPress: () {
-                    Navigator.of(context).pushNamed('/filter');
-                  }
-                ),
-                _bottomBatItem(
-                  Icons.tune_outlined, 
-                  "Adjust", 
-                  onPress: () {
-                    Navigator.of(context).pushNamed('/adjust');
-                  }
-                ),
-                _bottomBatItem(
-                  Icons.fit_screen, 
-                  "Fit", 
-                  onPress: () {
-                    Navigator.of(context).pushNamed('/fit');
-                  }
-                ),
-                _bottomBatItem(
-                  Icons.water_drop_outlined, 
-                  "Tint", 
-                  onPress: () {
-                    Navigator.of(context).pushNamed('/tint');
-                  }
-                ),
-                _bottomBatItem(
-                  Icons.lens_blur, 
-                  "Blur", 
-                  onPress: () {
-                    Navigator.of(context).pushNamed('/blur');
-                  }
-                ),
-                _bottomBatItem(
-                  Icons.emoji_emotions, 
-                  "Stickers", 
-                  onPress: () {
-                    Navigator.of(context).pushNamed('/sticker');
-                  }
-                ),
-                _bottomBatItem(
-                    Icons.text_fields,
-                    "Text",
-                    onPress: () {
-                      Navigator.of(context).pushNamed('/text');
-                    }
-                ),
-                _bottomBatItem(
-                    Icons.draw,
-                    "Draw",
-                    onPress: () {
-                      Navigator.of(context).pushNamed('/draw');
-                    }
-                ),
-                _bottomBatItem(
-                    Icons.star_border,
-                    "Mask",
-                    onPress: () {
-                      Navigator.of(context).pushNamed('/mask');
-                    }
-                ),
-              ]
+              ),
             ),
           ),
         )

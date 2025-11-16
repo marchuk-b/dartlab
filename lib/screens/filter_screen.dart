@@ -74,53 +74,56 @@ class _FilterScreenState extends State<FilterScreen> {
         height: 110,
         color: AppColors.bottomBarColor(isDark),
         child: SafeArea(
-          child: Consumer<AppImageProvider>(
-            builder:(BuildContext context, value, Widget? child){
-              return ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: filters.length,
-                itemBuilder: (BuildContext context, int index) {
-                  Filter filter = filters[index];
-                  return Padding(
-                    padding: EdgeInsetsGeometry.symmetric(horizontal: 10), 
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: 60,
-                          height: 60,
-                          child: FittedBox(
-                            fit: BoxFit.fill,
-                            child: InkWell(
-                              onTap: (){
-                                setState(() {
-                                  currentFilter = filter;
-                                });
-                              },
-                              child: Column(
-                                children: [
-                                  ColorFiltered(
-                                    colorFilter: ColorFilter.matrix(filter.matrix),
-                                    child: Image.memory(value.currentImage!),
-                                  )
-                                ],
-                              ),
-                            )
+          child: Center(  
+            child: Consumer<AppImageProvider>(
+              builder:(BuildContext context, value, Widget? child){
+                return ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  itemCount: filters.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    Filter filter = filters[index];
+                    return Padding(
+                      padding: EdgeInsetsGeometry.symmetric(horizontal: 10), 
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: 60,
+                            height: 60,
+                            child: FittedBox(
+                              fit: BoxFit.fill,
+                              child: InkWell(
+                                onTap: (){
+                                  setState(() {
+                                    currentFilter = filter;
+                                  });
+                                },
+                                child: Column(
+                                  children: [
+                                    ColorFiltered(
+                                      colorFilter: ColorFilter.matrix(filter.matrix),
+                                      child: Image.memory(value.currentImage!),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          filter.filterName, 
-                          style: TextStyle(
-                            color: AppColors.textPrimary(isDark)
+                          const SizedBox(height: 5),
+                          Text(
+                            filter.filterName, 
+                            style: TextStyle(
+                              color: AppColors.textPrimary(isDark)
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              );
-            },
+                        ],
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
           )
         ),
       ),

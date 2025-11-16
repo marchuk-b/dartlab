@@ -201,51 +201,53 @@ class _AdjustScreenState extends State<AdjustScreen> {
         height: 80,
         color: AppColors.bottomBarColor(isDark), // Bottom navigation bar color
         child: SafeArea(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                _bottomBatItem(
-                  Icons.brightness_5, 
-                  "Brightness", 
-                  color: showBrightness ? AppColors.activeButton : null,
-                  onPress: () {
-                    showSlider(b: true);
-                  }
-                ),
-                _bottomBatItem(
-                  Icons.contrast, 
-                  "Contrast", 
-                  color: showContrast ? AppColors.activeButton : null,
-                  onPress: () {
-                    showSlider(c: true);
-                  }
-                ),
-                _bottomBatItem(
-                  Icons.filter_tilt_shift, 
-                  "Saturation",
-                  color: showSaturation? AppColors.activeButton : null, 
-                  onPress: () {
-                    showSlider(s: true);
-                  }
-                ),
-                _bottomBatItem(
-                  Icons.water_drop, 
-                  "Hue", 
-                  color: showHue ? AppColors.activeButton : null,
-                  onPress: () {
-                    showSlider(h: true);
-                  }
-                ),
-                _bottomBatItem(
-                  Icons.motion_photos_on, 
-                  "Sepia", 
-                  color: showSepia ? AppColors.activeButton : null,
-                  onPress: () {
-                    showSlider(se: true);
-                  }
-                ),
-              ]
+          child: Center(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  _bottomBatItem(
+                    Icons.brightness_5, 
+                    "Brightness", 
+                    color: showBrightness ? AppColors.activeButton : null,
+                    onPress: () {
+                      showSlider(b: true);
+                    }
+                  ),
+                  _bottomBatItem(
+                    Icons.contrast, 
+                    "Contrast", 
+                    color: showContrast ? AppColors.activeButton : null,
+                    onPress: () {
+                      showSlider(c: true);
+                    }
+                  ),
+                  _bottomBatItem(
+                    Icons.filter_tilt_shift, 
+                    "Saturation",
+                    color: showSaturation? AppColors.activeButton : null, 
+                    onPress: () {
+                      showSlider(s: true);
+                    }
+                  ),
+                  _bottomBatItem(
+                    Icons.water_drop, 
+                    "Hue", 
+                    color: showHue ? AppColors.activeButton : null,
+                    onPress: () {
+                      showSlider(h: true);
+                    }
+                  ),
+                  _bottomBatItem(
+                    Icons.motion_photos_on, 
+                    "Sepia", 
+                    color: showSepia ? AppColors.activeButton : null,
+                    onPress: () {
+                      showSlider(se: true);
+                    }
+                  ),
+                ]
+              ),
             ),
           ),
         )
