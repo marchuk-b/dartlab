@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:photo_editor/constants/app_colors.dart';
 import 'package:photo_editor/helper/app_image_picker.dart';
 import 'package:photo_editor/providers/app_image_provider.dart';
+import 'package:photo_editor/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class StartScreen extends StatefulWidget {
@@ -15,7 +16,6 @@ class StartScreen extends StatefulWidget {
 }
 
 class _StartScreenState extends State<StartScreen> {
-
   late AppImageProvider imageProvider;
 
   @override
@@ -26,9 +26,12 @@ class _StartScreenState extends State<StartScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDark = themeProvider.isDarkTheme;
+
     return Scaffold(
       body: Container(
-        color: AppColors.backgroundColor,
+        color: AppColors.backgroundColor(isDark),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -76,7 +79,7 @@ class _StartScreenState extends State<StartScreen> {
       ),
       bottomNavigationBar: Container(
         height: 80,
-        color: AppColors.bottomBarColor,
+        color: AppColors.bottomBarColor(isDark),
         child: SafeArea(
           child: Center(
             child: Row(
@@ -84,17 +87,17 @@ class _StartScreenState extends State<StartScreen> {
               children: [
                 TextButton.icon(
                   onPressed: () {
-
+                    Navigator.of(context).pushNamed('/settings');
                   },
-                  icon: Icon(Icons.settings, color: AppColors.iconColor),
-                  label: Text("Settings", style: TextStyle(color: AppColors.textSecondary)),
+                  icon: Icon(Icons.settings, color: AppColors.iconColor(isDark)),
+                  label: Text("Settings", style: TextStyle(color: AppColors.textSecondary(isDark))),
                 ),
                 TextButton.icon(
                   onPressed: () {
 
                   },
-                  icon: Icon(Icons.question_mark, color: AppColors.iconColor),
-                  label: Text("About", style: TextStyle(color: AppColors.textSecondary)),
+                  icon: Icon(Icons.question_mark, color: AppColors.iconColor(isDark)),
+                  label: Text("About", style: TextStyle(color: AppColors.textSecondary(isDark))),
                 ),
               ],
             ),
@@ -109,6 +112,9 @@ class _StartScreenState extends State<StartScreen> {
     required String label,
     required VoidCallback onPressed,
   }) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDark = themeProvider.isDarkTheme;
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -116,7 +122,7 @@ class _StartScreenState extends State<StartScreen> {
           width: 100,
           height: 100,
           decoration: BoxDecoration(
-            color: AppColors.secondaryColor,
+            color: AppColors.secondaryColor(isDark),
             shape: BoxShape.circle,
             boxShadow: [
               BoxShadow(
@@ -143,7 +149,7 @@ class _StartScreenState extends State<StartScreen> {
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 14,
-            color: AppColors.textSecondary,
+            color: AppColors.textSecondary(isDark),
           ),
         ),
       ],

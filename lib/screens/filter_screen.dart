@@ -4,6 +4,7 @@ import 'package:photo_editor/constants/app_colors.dart';
 import 'package:photo_editor/helper/filters.dart';
 import 'package:photo_editor/model/filter.dart';
 import 'package:photo_editor/providers/app_image_provider.dart';
+import 'package:photo_editor/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:screenshot/screenshot.dart';
 
@@ -31,6 +32,9 @@ class _FilterScreenState extends State<FilterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDark = themeProvider.isDarkTheme;
+
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(),
@@ -68,7 +72,7 @@ class _FilterScreenState extends State<FilterScreen> {
       bottomNavigationBar: Container(
         width: double.infinity,
         height: 110,
-        color: AppColors.bottomBarColor,
+        color: AppColors.bottomBarColor(isDark),
         child: SafeArea(
           child: Consumer<AppImageProvider>(
             builder:(BuildContext context, value, Widget? child){
@@ -107,8 +111,8 @@ class _FilterScreenState extends State<FilterScreen> {
                         const SizedBox(height: 5),
                         Text(
                           filter.filterName, 
-                          style: const TextStyle(
-                            color: AppColors.textPrimary
+                          style: TextStyle(
+                            color: AppColors.textPrimary(isDark)
                           ),
                         ),
                       ],

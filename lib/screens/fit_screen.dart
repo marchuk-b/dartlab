@@ -9,6 +9,7 @@ import 'package:photo_editor/helper/app_image_picker.dart';
 import 'package:photo_editor/helper/pixel_color_image.dart';
 import 'package:photo_editor/helper/textures.dart';
 import 'package:photo_editor/providers/app_image_provider.dart';
+import 'package:photo_editor/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:screenshot/screenshot.dart';
 import '../model/texture.dart' as t;
@@ -71,6 +72,9 @@ class _FitScreenState extends State<FitScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDark = themeProvider.isDarkTheme;
+
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(),
@@ -146,7 +150,7 @@ class _FitScreenState extends State<FitScreen> {
       bottomNavigationBar: Container(
         width: double.infinity,
         height: 130,
-        color: AppColors.bottomBarColor, // Bottom navigation bar color
+        color: AppColors.bottomBarColor(isDark), // Bottom navigation bar color
         child: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -216,6 +220,9 @@ class _FitScreenState extends State<FitScreen> {
   }
 
   Widget _bottomBatItem(IconData icon, String title, {Color? color, required onPress}) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDark = themeProvider.isDarkTheme;
+
     return InkWell(
       onTap: () {
         onPress();
@@ -227,13 +234,13 @@ class _FitScreenState extends State<FitScreen> {
           children: [
             Icon(
               icon, 
-              color: color ?? AppColors.iconColor,
+              color: color ?? AppColors.iconColor(isDark),
             ),
             const SizedBox(height: 3),
             Text(
               title, 
               style: TextStyle(
-                color: color ?? AppColors.textSecondary,
+                color: color ?? AppColors.textSecondary(isDark),
               ),
             ),
           ],
@@ -243,8 +250,11 @@ class _FitScreenState extends State<FitScreen> {
   }
 
   Widget ratioWidget() {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDark = themeProvider.isDarkTheme;
+
     return Container(
-      color: AppColors.secondaryColor,
+      color: AppColors.secondaryColor(isDark),
       child: Stack(
         children: [
           SingleChildScrollView(
@@ -259,7 +269,7 @@ class _FitScreenState extends State<FitScreen> {
                     });
                   }, 
                   child: Text("1:1",
-                    style: TextStyle(color: AppColors.textPrimary),
+                    style: TextStyle(color: AppColors.textPrimary(isDark)),
                   )
                 ),
                 TextButton(
@@ -270,7 +280,7 @@ class _FitScreenState extends State<FitScreen> {
                     });
                   },  
                   child: Text("1:2",
-                    style: TextStyle(color: AppColors.textPrimary),
+                    style: TextStyle(color: AppColors.textPrimary(isDark)),
                   )
                 ),
                 TextButton(
@@ -281,7 +291,7 @@ class _FitScreenState extends State<FitScreen> {
                     });
                   },  
                   child: Text("2:1",
-                    style: TextStyle(color: AppColors.textPrimary),
+                    style: TextStyle(color: AppColors.textPrimary(isDark)),
                   )
                 ),
                 TextButton(
@@ -292,7 +302,7 @@ class _FitScreenState extends State<FitScreen> {
                     });
                   },  
                   child: Text("3:4",
-                    style: TextStyle(color: AppColors.textPrimary),
+                    style: TextStyle(color: AppColors.textPrimary(isDark)),
                   )
                 ),
                 TextButton(
@@ -303,7 +313,7 @@ class _FitScreenState extends State<FitScreen> {
                     });
                   },  
                   child: Text("4:3",
-                    style: TextStyle(color: AppColors.textPrimary),
+                    style: TextStyle(color: AppColors.textPrimary(isDark)),
                   )
                 ),
                 TextButton(
@@ -314,7 +324,7 @@ class _FitScreenState extends State<FitScreen> {
                     });
                   },  
                   child: Text("4:5",
-                    style: TextStyle(color: AppColors.textPrimary),
+                    style: TextStyle(color: AppColors.textPrimary(isDark)),
                   )
                 ),
                 TextButton(
@@ -325,7 +335,7 @@ class _FitScreenState extends State<FitScreen> {
                     });
                   },
                   child: Text("5:4",
-                    style: TextStyle(color: AppColors.textPrimary),
+                    style: TextStyle(color: AppColors.textPrimary(isDark)),
                   )
                 ),
                 TextButton(
@@ -336,7 +346,7 @@ class _FitScreenState extends State<FitScreen> {
                     });
                   },  
                   child: Text("16:9",
-                    style: TextStyle(color: AppColors.textPrimary),
+                    style: TextStyle(color: AppColors.textPrimary(isDark)),
                   )
                 ),
                 TextButton(
@@ -347,7 +357,7 @@ class _FitScreenState extends State<FitScreen> {
                     });
                   },  
                   child: Text("9:16",
-                    style: TextStyle(color: AppColors.textPrimary),
+                    style: TextStyle(color: AppColors.textPrimary(isDark)),
                   )
                 ),
               ],
@@ -359,8 +369,11 @@ class _FitScreenState extends State<FitScreen> {
   }
 
   Widget blurWidget() {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDark = themeProvider.isDarkTheme;
+
     return Container(
-      color: AppColors.secondaryColor,
+      color: AppColors.secondaryColor(isDark),
       child: Center(
         child: Row(
           children: [
@@ -374,7 +387,7 @@ class _FitScreenState extends State<FitScreen> {
               }, 
               icon: Icon(
                 Icons.photo_library_outlined, 
-                color: AppColors.iconColor
+                color: AppColors.iconColor(isDark)
               )
             ),
             Expanded(
@@ -398,8 +411,11 @@ class _FitScreenState extends State<FitScreen> {
   }
 
   Widget colorWidget() {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDark = themeProvider.isDarkTheme;
+
     return Container(
-      color: AppColors.secondaryColor,
+      color: AppColors.secondaryColor(isDark),
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -418,7 +434,7 @@ class _FitScreenState extends State<FitScreen> {
               }, 
               icon: Icon(
                 Icons.color_lens, 
-                color: AppColors.iconColor
+                color: AppColors.iconColor(isDark)
               )
             ),
             IconButton(
@@ -436,7 +452,7 @@ class _FitScreenState extends State<FitScreen> {
               }, 
               icon: Icon(
                 Icons.colorize, 
-                color: AppColors.iconColor
+                color: AppColors.iconColor(isDark)
               )
             ),
           ],
@@ -446,8 +462,11 @@ class _FitScreenState extends State<FitScreen> {
   }
 
   Widget textureWidget() {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDark = themeProvider.isDarkTheme;
+
     return Container(
-      color: AppColors.secondaryColor,
+      color: AppColors.secondaryColor(isDark),
       child: Center(
         child: ListView.builder(
           scrollDirection: Axis.horizontal,

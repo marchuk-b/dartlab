@@ -6,6 +6,7 @@ import 'package:photo_editor/constants/app_colors.dart';
 import 'package:photo_editor/helper/app_color_picker.dart';
 import 'package:photo_editor/helper/pixel_color_image.dart';
 import 'package:photo_editor/providers/app_image_provider.dart';
+import 'package:photo_editor/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:screenshot/screenshot.dart';
 
@@ -33,6 +34,9 @@ class _DrawScreenState extends State<DrawScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDark = themeProvider.isDarkTheme;
+
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(),
@@ -114,7 +118,7 @@ class _DrawScreenState extends State<DrawScreen> {
       bottomNavigationBar: Container(
         width: double.infinity,
         height: 80,
-        color: AppColors.bottomBarColor, // Bottom navigation bar color
+        color: AppColors.bottomBarColor(isDark), // Bottom navigation bar color
         child: SafeArea(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -200,6 +204,9 @@ class _DrawScreenState extends State<DrawScreen> {
   }
 
   Widget _bottomBatItem(IconData icon, { required onPress}) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDark = themeProvider.isDarkTheme;
+
     return InkWell(
       onTap: () {
         onPress();
@@ -211,7 +218,7 @@ class _DrawScreenState extends State<DrawScreen> {
           children: [
             Icon(
               icon, 
-              color: AppColors.iconColor,
+              color: AppColors.iconColor(isDark),
             ),
           ],
         ),

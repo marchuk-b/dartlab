@@ -5,6 +5,7 @@ import 'package:photo_editor/constants/app_colors.dart';
 import 'package:photo_editor/helper/tints.dart';
 import 'package:photo_editor/model/tint.dart';
 import 'package:photo_editor/providers/app_image_provider.dart';
+import 'package:photo_editor/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:screenshot/screenshot.dart';
 
@@ -31,6 +32,9 @@ class _TintScreenState extends State<TintScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDark = themeProvider.isDarkTheme;
+
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(),
@@ -88,7 +92,7 @@ class _TintScreenState extends State<TintScreen> {
       bottomNavigationBar: Container(
         width: double.infinity,
         height: 80,
-        color: AppColors.bottomBarColor,
+        color: AppColors.bottomBarColor(isDark),
         child: SafeArea(
           child: ListView.builder(
             shrinkWrap: true,

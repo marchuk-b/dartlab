@@ -6,6 +6,7 @@ import 'package:lindi_sticker_widget/lindi_sticker_widget.dart';
 import 'package:photo_editor/constants/app_colors.dart';
 import 'package:photo_editor/helper/stickers.dart';
 import 'package:photo_editor/providers/app_image_provider.dart';
+import 'package:photo_editor/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class StickerScreen extends StatefulWidget {
@@ -29,6 +30,9 @@ class _StickerScreenState extends State<StickerScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDark = themeProvider.isDarkTheme;
+
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(),
@@ -67,13 +71,13 @@ class _StickerScreenState extends State<StickerScreen> {
       bottomNavigationBar: Container(
         width: double.infinity,
         height: 140,
-        color: AppColors.bottomBarColor,
+        color: AppColors.bottomBarColor(isDark),
         child: SafeArea(
           child: Column(
             children: [
               Expanded(
                 child: Container(
-                  color: AppColors.secondaryColor,
+                  color: AppColors.secondaryColor(isDark),
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: Stickers().list()[index].length,

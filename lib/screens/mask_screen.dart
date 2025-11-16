@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:photo_editor/constants/app_colors.dart';
 import 'package:photo_editor/helper/shapes.dart';
 import 'package:photo_editor/providers/app_image_provider.dart';
+import 'package:photo_editor/providers/theme_provider.dart';
 import 'package:photo_editor/widgets/gesture_detector_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:screenshot/screenshot.dart';
@@ -35,6 +36,9 @@ class _MaskScreenState extends State<MaskScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDark = themeProvider.isDarkTheme;
+
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(),
@@ -88,13 +92,13 @@ class _MaskScreenState extends State<MaskScreen> {
       bottomNavigationBar: Container(
         width: double.infinity,
         height: 120,
-        color: AppColors.bottomBarColor,
+        color: AppColors.bottomBarColor(isDark),
         child: SafeArea(
           child: Column(
             children: [
               SingleChildScrollView(
                 child: Container(
-                  color: AppColors.secondaryColor,
+                  color: AppColors.secondaryColor(isDark),
                   child: Row(
                     children: [
                       TextButton(
@@ -105,7 +109,7 @@ class _MaskScreenState extends State<MaskScreen> {
                           });
                         },
                         child: Text('DstIn',
-                          style: TextStyle(color: AppColors.textPrimary),
+                          style: TextStyle(color: AppColors.textPrimary(isDark)),
                         )
                       ),
                       TextButton(
@@ -115,7 +119,7 @@ class _MaskScreenState extends State<MaskScreen> {
                           });
                         },
                         child: Text('Overlay',
-                          style: TextStyle(color: AppColors.textPrimary),
+                          style: TextStyle(color: AppColors.textPrimary(isDark)),
                         )
                       ),
                       TextButton(
@@ -126,7 +130,7 @@ class _MaskScreenState extends State<MaskScreen> {
                           });
                         },
                         child: Text('Screen',
-                          style: TextStyle(color: AppColors.textPrimary),
+                          style: TextStyle(color: AppColors.textPrimary(isDark)),
                         )
                       ),
                       TextButton(
@@ -136,7 +140,7 @@ class _MaskScreenState extends State<MaskScreen> {
                           });
                         },
                         child: Text('Saturation',
-                          style: TextStyle(color: AppColors.textPrimary),
+                          style: TextStyle(color: AppColors.textPrimary(isDark)),
                         )
                       ),
                       TextButton(
@@ -146,7 +150,7 @@ class _MaskScreenState extends State<MaskScreen> {
                           });
                         },
                         child: Text('Difference',
-                          style: TextStyle(color: AppColors.textPrimary),
+                          style: TextStyle(color: AppColors.textPrimary(isDark)),
                         )
                       ),
                     ],
@@ -180,6 +184,9 @@ class _MaskScreenState extends State<MaskScreen> {
   }
 
   Widget _bottomBatItem(IconData icon, {required onPress}) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDark = themeProvider.isDarkTheme;
+
     return InkWell(
       onTap: () {
         onPress();
@@ -191,7 +198,7 @@ class _MaskScreenState extends State<MaskScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Icon(icon, size: 40, color: AppColors.iconColor,),
+              child: Icon(icon, size: 40, color: AppColors.iconColor(isDark),),
             )
           ],
         ),

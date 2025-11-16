@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:photo_editor/constants/app_colors.dart';
 import 'package:photo_editor/providers/app_image_provider.dart';
+import 'package:photo_editor/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:screenshot/screenshot.dart';
 
@@ -30,6 +31,9 @@ class _BlurScreenState extends State<BlurScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDark = themeProvider.isDarkTheme;
+
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(),
@@ -79,9 +83,9 @@ class _BlurScreenState extends State<BlurScreen> {
                 children: [
                   Row(
                     children: [
-                      const Text("X:", 
+                      Text("X:",
                         style: TextStyle(
-                          color: AppColors.textPrimary
+                          color: AppColors.textPrimary(isDark)
                         ) 
                       ),
                       Expanded(
@@ -98,9 +102,9 @@ class _BlurScreenState extends State<BlurScreen> {
                   ),
                   Row(
                     children: [
-                      const Text("Y: ", 
+                      Text("Y: ",
                         style: TextStyle(
-                          color: AppColors.textPrimary
+                          color: AppColors.textPrimary(isDark)
                         ) 
                       ),
                       Expanded(
@@ -124,7 +128,7 @@ class _BlurScreenState extends State<BlurScreen> {
       bottomNavigationBar: Container(
         width: double.infinity,
         height: 80,
-        color: AppColors.bottomBarColor,
+        color: AppColors.bottomBarColor(isDark),
         child: SafeArea(
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -176,6 +180,9 @@ class _BlurScreenState extends State<BlurScreen> {
   }
 
   Widget _bottomBatItem(String title, {Color? color, required onPress}) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDark = themeProvider.isDarkTheme;
+
     return InkWell(
       onTap: () {
         onPress();
@@ -188,7 +195,7 @@ class _BlurScreenState extends State<BlurScreen> {
             Text(
               title, 
               style: TextStyle(
-                color: color ?? AppColors.textSecondary,
+                color: color ?? AppColors.textSecondary(isDark),
               ),
             ),
           ],

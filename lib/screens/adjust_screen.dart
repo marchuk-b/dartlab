@@ -4,6 +4,7 @@ import 'package:colorfilter_generator/colorfilter_generator.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_editor/constants/app_colors.dart';
 import 'package:photo_editor/providers/app_image_provider.dart';
+import 'package:photo_editor/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:screenshot/screenshot.dart';
 
@@ -63,6 +64,9 @@ class _AdjustScreenState extends State<AdjustScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDark = themeProvider.isDarkTheme;
+
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(),
@@ -181,9 +185,9 @@ class _AdjustScreenState extends State<AdjustScreen> {
                       adjust();
                     });
                   }, 
-                  child: const Text("Reset",
+                  child: Text("Reset",
                     style: TextStyle(
-                      color: AppColors.textPrimary,
+                      color: AppColors.textPrimary(isDark),
                     ),
                   )
                 ),
@@ -195,7 +199,7 @@ class _AdjustScreenState extends State<AdjustScreen> {
       bottomNavigationBar: Container(
         width: double.infinity,
         height: 80,
-        color: AppColors.bottomBarColor, // Bottom navigation bar color
+        color: AppColors.bottomBarColor(isDark), // Bottom navigation bar color
         child: SafeArea(
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -250,6 +254,9 @@ class _AdjustScreenState extends State<AdjustScreen> {
   }
 
   Widget _bottomBatItem(IconData icon, String title, {Color? color, required onPress}) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDark = themeProvider.isDarkTheme;
+
     return InkWell(
       onTap: () {
         onPress();
@@ -261,13 +268,13 @@ class _AdjustScreenState extends State<AdjustScreen> {
           children: [
             Icon(
               icon, 
-              color: color ?? AppColors.iconColor,
+              color: color ?? AppColors.iconColor(isDark),
             ),
             const SizedBox(height: 3),
             Text(
               title, 
               style: TextStyle(
-                color: color ?? AppColors.textSecondary,
+                color: color ?? AppColors.textSecondary(isDark),
               ),
             ),
           ],

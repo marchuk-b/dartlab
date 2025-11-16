@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 import 'package:photo_editor/constants/app_colors.dart';
 import 'package:photo_editor/providers/app_image_provider.dart';
+import 'package:photo_editor/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -44,11 +45,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDark = themeProvider.isDarkTheme;
+
     return Scaffold(
       appBar: AppBar(
         // title: Text("Photo Editor"),
         leading: BackButton(
           onPressed: () {
+            appImageProvider.clearImage();
             Navigator.of(context).pushReplacementNamed('/');
           },
         ),
@@ -57,10 +62,10 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: (){
               _savePhoto();
             },
-            child: const Text(
+            child: Text(
               "Save",
               style: TextStyle(
-                color: AppColors.textPrimary,
+                color: AppColors.textPrimary(isDark),
               ),
             ),
           ),
@@ -86,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
               margin: const EdgeInsets.all(15),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: AppColors.secondaryColor,
+                color: AppColors.secondaryColor(isDark),
               ),
               child: Consumer<AppImageProvider>(
                 builder: (context, value, child) {
@@ -98,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           appImageProvider.undo();
                         }, 
                         icon: Icon(Icons.undo, 
-                          color: value.canUndo ? Colors.white : Colors.white10
+                          color: value.canUndo ? AppColors.activeArrow : AppColors.disabledArrow
                         )
                       ),
                       IconButton(
@@ -106,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                            appImageProvider.redo();
                         }, 
                         icon: Icon(Icons.redo, 
-                          color: value.canRedo ? Colors.white : Colors.white10
+                          color: value.canRedo ? AppColors.activeArrow : AppColors.disabledArrow
                         )
                       ),
                     ],
@@ -120,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: Container(
         width: double.infinity,
         height: 90,
-        color: AppColors.bottomBarColor,
+        color: AppColors.bottomBarColor(isDark),
         child: SafeArea(
           child: SingleChildScrollView(
             padding: EdgeInsetsGeometry.directional(top: 7),
@@ -206,6 +211,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _bottomBatItem(IconData icon, String title, {required onPress}) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDark = themeProvider.isDarkTheme;
+
     return InkWell(
       onTap: () {
         onPress();
@@ -217,13 +225,13 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Icon(
               icon, 
-              color: AppColors.textPrimary,
+              color: AppColors.textPrimary(isDark),
             ),
             const SizedBox(height: 3),
             Text(
               title, 
               style: TextStyle(
-                color: AppColors.textPrimary,
+                color: AppColors.textPrimary(isDark),
               ),
             ),
           ],

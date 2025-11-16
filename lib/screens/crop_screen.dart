@@ -3,6 +3,7 @@ import 'package:crop_image/crop_image.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_editor/constants/app_colors.dart';
 import 'package:photo_editor/providers/app_image_provider.dart';
+import 'package:photo_editor/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'dart:ui' as ui;
 
@@ -29,6 +30,9 @@ class _CropScreenState extends State<CropScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDark = themeProvider.isDarkTheme;
+
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(),
@@ -73,7 +77,7 @@ class _CropScreenState extends State<CropScreen> {
       bottomNavigationBar: Container(
         width: double.infinity,
         height: 60,
-        color: AppColors.bottomBarColor,
+        color: AppColors.bottomBarColor(isDark),
         child: SafeArea(
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -82,7 +86,7 @@ class _CropScreenState extends State<CropScreen> {
                 _bottomBatItem(
                   child: Icon(
                     Icons.rotate_90_degrees_ccw_outlined,
-                    color: AppColors.iconColor,
+                    color: AppColors.iconColor(isDark),
                   ), 
                   onPress: () {
                     controller.rotateLeft();
@@ -91,7 +95,7 @@ class _CropScreenState extends State<CropScreen> {
                 _bottomBatItem(
                   child: Icon(
                     Icons.rotate_90_degrees_cw_outlined,
-                    color: AppColors.iconColor,
+                    color: AppColors.iconColor(isDark),
                   ), 
                   onPress: () { 
                     controller.rotateRight();
@@ -108,7 +112,7 @@ class _CropScreenState extends State<CropScreen> {
                 _bottomBatItem(
                   child: Text(
                     "Free", 
-                    style: TextStyle(color: AppColors.textPrimary)
+                    style: TextStyle(color: AppColors.textPrimary(isDark))
                   ),  
                   onPress: () {
                     controller.aspectRatio = null;
@@ -118,7 +122,7 @@ class _CropScreenState extends State<CropScreen> {
                 _bottomBatItem(
                   child: Text(
                     "Square", 
-                    style: TextStyle(color: AppColors.textPrimary)
+                    style: TextStyle(color: AppColors.textPrimary(isDark))
                   ),  
                   onPress: () {
                     controller.aspectRatio = 1;
@@ -128,7 +132,7 @@ class _CropScreenState extends State<CropScreen> {
                 _bottomBatItem(
                   child: Text(
                     "1:2", 
-                    style: TextStyle(color: AppColors.textPrimary)
+                    style: TextStyle(color: AppColors.textPrimary(isDark))
                   ),  
                   onPress: () {
                     controller.aspectRatio = 1 / 2;
@@ -138,7 +142,7 @@ class _CropScreenState extends State<CropScreen> {
                 _bottomBatItem(
                   child: Text(
                     "3:4", 
-                    style: TextStyle(color: AppColors.textPrimary)
+                    style: TextStyle(color: AppColors.textPrimary(isDark))
                   ),  
                   onPress: () {
                     controller.aspectRatio = 3 / 4;
@@ -148,7 +152,7 @@ class _CropScreenState extends State<CropScreen> {
                 _bottomBatItem(
                   child: Text(
                     "4:5", 
-                    style: TextStyle(color: AppColors.textPrimary)
+                    style: TextStyle(color: AppColors.textPrimary(isDark))
                   ),  
                   onPress: () {
                     controller.aspectRatio = 4 / 5;
@@ -158,7 +162,7 @@ class _CropScreenState extends State<CropScreen> {
                 _bottomBatItem(
                   child: Text(
                     "9:16", 
-                    style: TextStyle(color: AppColors.textPrimary)
+                    style: TextStyle(color: AppColors.textPrimary(isDark))
                   ),  
                   onPress: () {
                     controller.aspectRatio = 9 / 16;
@@ -169,7 +173,7 @@ class _CropScreenState extends State<CropScreen> {
                 _bottomBatItem(
                   child: Text(
                     "2:1", 
-                    style: TextStyle(color: AppColors.textPrimary)
+                    style: TextStyle(color: AppColors.textPrimary(isDark))
                   ),  
                   onPress: () {
                     controller.aspectRatio = 2 / 1;
@@ -179,7 +183,7 @@ class _CropScreenState extends State<CropScreen> {
                 _bottomBatItem(
                   child: Text(
                     "4:3", 
-                    style: TextStyle(color: AppColors.textPrimary)
+                    style: TextStyle(color: AppColors.textPrimary(isDark))
                   ),  
                   onPress: () {
                     controller.aspectRatio = 4 / 3;
@@ -189,7 +193,7 @@ class _CropScreenState extends State<CropScreen> {
                 _bottomBatItem(
                   child: Text(
                     "5:4", 
-                    style: TextStyle(color: AppColors.textPrimary)
+                    style: TextStyle(color: AppColors.textPrimary(isDark))
                   ),  
                   onPress: () {
                     controller.aspectRatio = 5 / 4;
@@ -199,7 +203,7 @@ class _CropScreenState extends State<CropScreen> {
                 _bottomBatItem(
                   child: Text(
                     "16:9", 
-                    style: TextStyle(color: AppColors.textPrimary)
+                    style: TextStyle(color: AppColors.textPrimary(isDark))
                   ),  
                   onPress: () {
                     controller.aspectRatio = 16 / 9;
