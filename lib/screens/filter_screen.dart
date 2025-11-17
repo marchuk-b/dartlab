@@ -57,9 +57,16 @@ class _FilterScreenState extends State<FilterScreen> {
             if (value.currentImage != null) {
               return Screenshot(
                 controller: screenshotController,
-                child: ColorFiltered(
-                  colorFilter: ColorFilter.matrix(currentFilter.matrix),
-                  child: Image.memory(value.currentImage!),
+                child: InteractiveViewer(
+                  minScale: 0.5,
+                  maxScale: 4.0,
+                  boundaryMargin: const EdgeInsets.all(10),
+                  panEnabled: true,  // Можливість переміщувати
+                  scaleEnabled: true,
+                  child: ColorFiltered(
+                    colorFilter: ColorFilter.matrix(currentFilter.matrix),
+                    child: Image.memory(value.currentImage!),
+                  ),
                 ),
               );
             }

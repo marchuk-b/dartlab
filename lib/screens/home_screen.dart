@@ -77,7 +77,14 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Consumer<AppImageProvider>(
               builder: (BuildContext context, value, Widget? child) {
                 if (value.currentImage != null) {
-                  return Image.memory(value.currentImage!);
+                  return InteractiveViewer(
+                      minScale: 0.5,
+                      maxScale: 4.0,
+                      boundaryMargin: const EdgeInsets.all(10),
+                      panEnabled: true,  // Можливість переміщувати
+                      scaleEnabled: true,
+                      child: Image.memory(value.currentImage!)
+                  );
                 }
                 return const Center(
                   child: CircularProgressIndicator(),

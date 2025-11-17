@@ -131,7 +131,14 @@ class _FitScreenState extends State<FitScreen> {
                             ),
                           ),
                           Center(
-                            child: Image.memory(value.currentImage!),
+                            child: InteractiveViewer(
+                                minScale: 0.01,
+                                maxScale: 4.0,
+                                boundaryMargin: const EdgeInsets.all(10),
+                                panEnabled: true,  // Можливість переміщувати
+                                scaleEnabled: true,
+                                child: Image.memory(value.currentImage!)
+                            ),
                           )
                         ],
                       )
@@ -149,7 +156,7 @@ class _FitScreenState extends State<FitScreen> {
 
       bottomNavigationBar: Container(
         width: double.infinity,
-        height: 110,
+        height: 130,
         color: AppColors.bottomBarColor(isDark), // Bottom navigation bar color
         child: SafeArea(
           child: Column(
