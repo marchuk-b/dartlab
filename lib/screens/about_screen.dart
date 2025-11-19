@@ -185,34 +185,4 @@ class _AboutScreenState extends State<AboutScreen> {
       )
     );
   }
-
-  Widget _itemButton({
-    required IconData icon,
-    required String title,
-    required onClick
-  }) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    final isDark = themeProvider.isDarkTheme;
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-      child: Row(
-        children: [
-          Icon(
-            icon,
-            color: AppColors.iconColor(isDark),
-            size: 24,
-          ),
-          const SizedBox(width: 8),
-          Text(
-            title,
-            style: TextStyle(
-              color: AppColors.textPrimary(isDark),
-              fontSize: 16,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }

@@ -2,7 +2,7 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter/material.dart';
 
 class AppColorPicker {
-  show(BuildContext context, {Color? backgroundColor, onPick}) {
+  Future show(BuildContext context, {Color? backgroundColor, onPick}) {
     return showDialog(
       context: context,
       builder: (BuildContext context) {

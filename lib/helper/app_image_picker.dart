@@ -7,7 +7,7 @@ class AppImagePicker{
 
   AppImagePicker({required this.source});
 
-  pick({ onPick }) async{
+  void pick({ dynamic onPick }) async{
     final ImagePicker picker = ImagePicker();
     final image = await picker.pickImage(source: source);
     if(image != null){
