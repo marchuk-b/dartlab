@@ -94,7 +94,7 @@ class _StartScreenState extends State<StartScreen> {
                 ),
                 TextButton.icon(
                   onPressed: () {
-
+                    Navigator.of(context).pushNamed('/about');
                   },
                   icon: Icon(Icons.question_mark, color: AppColors.iconColor(isDark)),
                   label: Text("About", style: TextStyle(color: AppColors.textSecondary(isDark))),

@@ -15,6 +15,7 @@ import 'package:photo_editor/screens/start_screen.dart';
 import 'package:photo_editor/screens/sticker_screen.dart';
 import 'package:photo_editor/screens/text_screen.dart';
 import 'package:photo_editor/screens/tint_screen.dart';
+import 'package:photo_editor/screens/about_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -77,6 +78,7 @@ class MainApp extends StatelessWidget {
             '/draw': (_) => DrawScreen(),
             '/mask': (_) => MaskScreen(),
             '/settings': (_) => SettingsScreen(),
+            '/about': (_) => AboutScreen(),
           },
           initialRoute: '/',
         );
