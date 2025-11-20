@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../constants/app_colors.dart';
 import '../providers/theme_provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AboutScreen extends StatefulWidget {
   const AboutScreen({super.key});
@@ -12,6 +13,14 @@ class AboutScreen extends StatefulWidget {
 }
 
 class _AboutScreenState extends State<AboutScreen> {
+
+  Future<void> openLink(String url) async {
+    final uri = Uri.parse(url);
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+      throw Exception("Cannot launch $url");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
@@ -146,7 +155,9 @@ class _AboutScreenState extends State<AboutScreen> {
                                 color: AppColors.iconColor(isDark),
                                 size: 24,
                               ),
-                              onPressed: (){}
+                              onPressed: (){
+                                openLink("https://www.instagram.com/marchukk.b/");
+                              }
                           ),
                         ),
                       ),
@@ -173,6 +184,34 @@ class _AboutScreenState extends State<AboutScreen> {
                                 size: 24,
                               ),
                               onPressed: (){}
+                          ),
+                        ),
+                      ),
+
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Divider(height: 1, color: AppColors.secondaryColor(isDark)),
+                      ),
+
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.all(5),
+                          child: TextButton.icon(
+                              label: Text(
+                                "You can contact us by email",
+                                style: TextStyle(
+                                  color: AppColors.textPrimary(isDark),
+                                  fontSize: 16,
+                                ),
+                              ),
+                              icon: Icon(Icons.email_outlined,
+                                color: AppColors.iconColor(isDark),
+                                size: 24,
+                              ),
+                              onPressed: (){
+                                openLink("mailto:marchukbohdan29@gmail.com");
+                              }
                           ),
                         ),
                       ),

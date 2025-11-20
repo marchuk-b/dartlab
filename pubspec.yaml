@@ -23,6 +23,7 @@ dependencies:
   screenshot: ^3.0.0
   text_editor: ^0.7.0
   widget_mask: ^1.0.0+0
+  url_launcher: ^6.3.0
 
 dev_dependencies:
   flutter_test:
