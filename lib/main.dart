@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:photo_editor/constants/app_colors.dart';
 import 'package:photo_editor/providers/app_image_provider.dart';
+import 'package:photo_editor/providers/quality_provider.dart';
 import 'package:photo_editor/providers/theme_provider.dart';
 import 'package:photo_editor/screens/adjust_screen.dart';
 import 'package:photo_editor/screens/blur_screen.dart';
@@ -23,6 +24,7 @@ void main() {
     providers: [
       ChangeNotifierProvider(create: (_) => AppImageProvider()),
       ChangeNotifierProvider(create: (_) => ThemeProvider()),
+      ChangeNotifierProvider(create: (_) => QualityProvider()),
     ], 
     child: MainApp()));
 }

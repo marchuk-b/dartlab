@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 import 'package:photo_editor/constants/app_colors.dart';
 import 'package:photo_editor/providers/app_image_provider.dart';
+import 'package:photo_editor/providers/quality_provider.dart';
 import 'package:photo_editor/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -21,10 +22,10 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
-  void _savePhoto() async {
+  void _savePhoto(exportQuality) async {
     final result = await ImageGallerySaverPlus.saveImage(
       appImageProvider.currentImage!,
-      quality: 100,
+      quality: exportQuality,
       name: '${DateTime.now().millisecondsSinceEpoch}'
     );
     if (!mounted) return;
@@ -48,6 +49,9 @@ class _HomeScreenState extends State<HomeScreen> {
     final themeProvider = Provider.of<ThemeProvider>(context);
     final isDark = themeProvider.isDarkTheme;
 
+    final qualityProvider = Provider.of<QualityProvider>(context);
+    final exportQuality = qualityProvider.exportQuality;
+
     return Scaffold(
       appBar: AppBar(
         // title: Text("Photo Editor"),
@@ -60,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           TextButton(
             onPressed: (){
-              _savePhoto();
+              _savePhoto(exportQuality.qualityValue);
             },
             child: Text(
               "Save",

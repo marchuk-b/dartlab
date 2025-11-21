@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:photo_editor/constants/app_colors.dart';
+import 'package:photo_editor/model/quality.dart';
+import 'package:photo_editor/providers/quality_provider.dart';
 import 'package:photo_editor/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -11,13 +13,14 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  String exportQuality = 'High'; // За замовчуванням
-  List<String> qualityOptions = ['Low', 'Medium', 'High', 'Max'];
-
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     final isDark = themeProvider.isDarkTheme;
+
+    final qualityProvider = Provider.of<QualityProvider>(context);
+    final qualityOptions = qualityProvider.qualityOptions;
+    final exportQuality = qualityProvider.exportQuality;
 
     return Scaffold(
       appBar: AppBar(
@@ -81,14 +84,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       title: "Export quality",
                       child: Container(
                         width: 90,
-                        child: DropdownButton<String>(
+                        child: DropdownButton<Quality>(
                           isExpanded: true,
                           value: exportQuality,
-                          onChanged: (String? newValue) {
-                            if (newValue != null) {
-                              setState(() {
-                                exportQuality = newValue;
-                              });
+                          onChanged: (Quality? quality) {
+                            if (quality != null) {
+                              qualityProvider.setExportQuality(quality);
                             }
                           },
                           dropdownColor: AppColors.secondaryColor(isDark),
@@ -96,10 +97,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             color: AppColors.textPrimary(isDark),
                             fontSize: 16,
                           ),
-                          items: qualityOptions.map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
+                          items: qualityOptions.map((quality) {
+                            return DropdownMenuItem<Quality>(
+                              value: quality,
+                              child: Text(quality.qualityName),
                             );
                           }).toList(),
                         ),

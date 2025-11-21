@@ -127,7 +127,13 @@ class _AdjustScreenState extends State<AdjustScreen> {
                               brightness = value;
                               adjust(b: brightness);
                             });
-                          }
+                          },
+                          onResetSlider: () {
+                            setState(() {
+                              brightness = 0;
+                              adjust(b: brightness);
+                            });
+                          },
                         ),
                       ),
                       Visibility(
@@ -139,7 +145,13 @@ class _AdjustScreenState extends State<AdjustScreen> {
                               contrast = value;
                               adjust(c: contrast);
                             });
-                          }
+                          },
+                          onResetSlider: () {
+                            setState(() {
+                              contrast = 0;
+                              adjust(c: contrast);
+                            });
+                          },
                         ),
                       ),
                       Visibility(
@@ -151,7 +163,13 @@ class _AdjustScreenState extends State<AdjustScreen> {
                               saturation = value;
                               adjust(s: saturation);
                             });
-                          }
+                          },
+                          onResetSlider: () {
+                            setState(() {
+                              saturation = 0;
+                              adjust(s: saturation);
+                            });
+                          },
                         ),
                       ),
                       Visibility(
@@ -163,7 +181,13 @@ class _AdjustScreenState extends State<AdjustScreen> {
                               hue = value;
                               adjust(h: hue);
                             });
-                          }
+                          },
+                          onResetSlider: () {
+                            setState(() {
+                              hue = 0;
+                              adjust(h: hue);
+                            });
+                          },
                         ),
                       ),
                       Visibility(
@@ -175,7 +199,13 @@ class _AdjustScreenState extends State<AdjustScreen> {
                               sepia = value;
                               adjust(se: sepia);
                             });
-                          }
+                          },
+                          onResetSlider: () {
+                            setState(() {
+                              sepia = 0;
+                              adjust(se: sepia);
+                            });
+                          },
                         ),
                       ),
                     ],
@@ -192,7 +222,7 @@ class _AdjustScreenState extends State<AdjustScreen> {
                       adjust();
                     });
                   }, 
-                  child: Text("Reset",
+                  child: Text("Reset all",
                     style: TextStyle(
                       color: AppColors.textPrimary(isDark),
                     ),
@@ -292,14 +322,17 @@ class _AdjustScreenState extends State<AdjustScreen> {
     );
   }
 
-  Widget slider({value, onChanged}){
-    return Slider(
-      label: '${value.toStringAsFixed(2)}',
-      value: value, 
-      onChanged: onChanged,
-      max: 1,
-      min: -0.9,
-      activeColor: AppColors.activeSlider,
+  Widget slider({value, onChanged, onResetSlider}){
+    return GestureDetector(
+      onDoubleTap: onResetSlider,
+      child: Slider(
+        label: '${value.toStringAsFixed(2)}',
+        value: value,
+        onChanged: onChanged,
+        max: 1,
+        min: -1,
+        activeColor: AppColors.activeSlider,
+      ),
     );
   }
 }
