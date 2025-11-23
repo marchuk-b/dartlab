@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:photo_editor/constants/app_colors.dart';
 import 'package:photo_editor/helper/app_image_picker.dart';
+import 'package:photo_editor/helper/platform_helper.dart';
 import 'package:photo_editor/providers/app_image_provider.dart';
 import 'package:photo_editor/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
@@ -58,6 +59,7 @@ class _StartScreenState extends State<StartScreen> {
                       icon: Icons.backup_outlined,
                       label: "Gallery",
                     ),
+                    if (PlatformHelper.isCameraSupported)
                     _circleButton(
                       onPressed: () {
                         AppImagePicker(source: ImageSource.camera)

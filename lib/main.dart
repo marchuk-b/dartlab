@@ -39,7 +39,7 @@ class MainApp extends StatelessWidget {
         final isDark = themeProvider.isDarkTheme;
 
         return MaterialApp(
-          title: "photo-editor",
+          title: "DartLab",
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             primarySwatch: Colors.blue,

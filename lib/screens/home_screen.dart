@@ -1,6 +1,9 @@
+import 'dart:io';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 import 'package:photo_editor/constants/app_colors.dart';
+import 'package:photo_editor/helper/platform_helper.dart';
 import 'package:photo_editor/providers/app_image_provider.dart';
 import 'package:photo_editor/providers/quality_provider.dart';
 import 'package:photo_editor/providers/theme_provider.dart';
@@ -23,24 +26,61 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _savePhoto(exportQuality) async {
-    final result = await ImageGallerySaverPlus.saveImage(
-      appImageProvider.currentImage!,
-      quality: exportQuality,
-      name: '${DateTime.now().millisecondsSinceEpoch}'
-    );
-    if (!mounted) return;
-    if (result['isSuccess']) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Image saved to Gallery')
-        )
+    if(PlatformHelper.isMobile) {
+      final result = await ImageGallerySaverPlus.saveImage(
+          appImageProvider.currentImage!,
+          quality: exportQuality,
+          name: 'dartlab_${DateTime.now().millisecondsSinceEpoch}',
       );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Something went wrong!')
-        )
-      );
+      if (!mounted) return;
+      if (result['isSuccess']) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+                content: Text('Image saved to Gallery')
+            )
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+                content: Text('Something went wrong!')
+            )
+        );
+      }
+    }
+    else if(PlatformHelper.isDesktop) {
+      try {
+        String? outputPath = await FilePicker.platform.saveFile(
+          dialogTitle: 'Save image',
+          fileName: 'dartlab_${DateTime.now().millisecondsSinceEpoch}',
+            type: FileType.image,
+        );
+
+        if (outputPath == null) {
+          // Користувач скасував
+          return;
+        }
+
+        // Додати розширення якщо його немає
+        if (!outputPath.toLowerCase().endsWith('.png') &&
+            !outputPath.toLowerCase().endsWith('.jpg') &&
+            !outputPath.toLowerCase().endsWith('.jpeg')) {
+          outputPath += '.jpg';
+        }
+
+        // Зберегти файл
+        final file = File(outputPath);
+        await file.writeAsBytes(appImageProvider.currentImage!);
+
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Image saved successfully!'))
+        );
+      } catch (e) {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Error: ${e.toString()}'))
+        );
+      }
     }
   }
 
