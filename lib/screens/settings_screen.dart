@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:photo_editor/constants/app_colors.dart';
 import 'package:photo_editor/model/quality.dart';
 import 'package:photo_editor/providers/quality_provider.dart';
@@ -13,6 +14,23 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  String _appVersion = '';
+  String _buildNumber = '';
+
+  Future<void> _loadAppInfo() async {
+    final packageInfo = await PackageInfo.fromPlatform();
+    setState(() {
+      _appVersion = packageInfo.version;
+      _buildNumber = packageInfo.buildNumber;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadAppInfo();
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
@@ -57,21 +75,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 child: Column(
                   children: [
                     _settingItem(
-                        icon: Icons.dark_mode_outlined,
-                        title: "Dark theme",
-                        child: Switch(
-                          value: isDark,
-                          onChanged: (val) {
-                            setState(() {
-                              themeProvider.setTheme(val);
-                            });
-                          },
+                      icon: Icons.dark_mode_outlined,
+                      title: "Dark theme",
+                      isDark: isDark,
+                      child: Switch(
+                        value: isDark,
+                        onChanged: (val) {
+                          setState(() {
+                            themeProvider.setTheme(val);
+                          });
+                        },
 
-                          activeThumbColor: Colors.white,
-                          activeTrackColor: AppColors.activeSlider.withValues(alpha: 0.7),
-                          inactiveThumbColor: Colors.grey,
-                          inactiveTrackColor: Colors.grey.withValues(alpha: 0.3),
-                        ),
+                        activeThumbColor: Colors.white,
+                        activeTrackColor: AppColors.activeSlider.withValues(alpha: 0.7),
+                        inactiveThumbColor: Colors.grey,
+                        inactiveTrackColor: Colors.grey.withValues(alpha: 0.3),
+                      ),
                     ),
 
                     Padding(
@@ -82,6 +101,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     _settingItem(
                       icon: Icons.high_quality_outlined,
                       title: "Export quality",
+                      isDark: isDark,
                       child: Container(
                         width: 90,
                         child: DropdownButton<Quality>(
@@ -134,8 +154,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     _settingItem(
                       icon: Icons.info_outline,
                       title: "Version",
+                      isDark: isDark,
                       child: Text(
-                        "1.0.0",
+                        _appVersion.isEmpty
+                            ? "Loading..."
+                            : _appVersion,
                         style: TextStyle(
                           color: AppColors.textSecondary(isDark),
                           fontSize: 16,
@@ -148,13 +171,69 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       child: Divider(height: 1, color: AppColors.secondaryColor(isDark)),
                     ),
 
-                    _settingItem(
-                      icon: Icons.code,
-                      title: "Developer",
-                      child: Icon(
-                        Icons.arrow_forward_ios,
-                        size: 16,
-                        color: AppColors.textSecondary(isDark),
+                    GestureDetector(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            backgroundColor: AppColors.primaryColor(isDark),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            title: Text(
+                              'Developer Info',
+                              style: TextStyle(
+                                color: AppColors.textPrimary(isDark),
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                _developerInfoRow(
+                                  'Developer',
+                                  'Bohdan Marchuk',
+                                  isDark,
+                                ),
+                                SizedBox(height: 12),
+                                _developerInfoRow(
+                                  'Email',
+                                  'marchukbohdan29@gmail.com',
+                                  isDark,
+                                ),
+                                SizedBox(height: 12),
+                                _developerInfoRow(
+                                  'GitHub',
+                                  'github.com/marchuk-b',
+                                  isDark,
+                                ),
+                              ],
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: Text(
+                                  'Close',
+                                  style: TextStyle(
+                                    color: AppColors.activeSlider,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                      child: _settingItem(
+                        icon: Icons.code,
+                        title: "Developer",
+                        isDark: isDark,
+                        child: Icon(
+                          Icons.arrow_forward_ios,
+                          size: 16,
+                          color: AppColors.textSecondary(isDark),
+                        ),
                       ),
                     ),
                   ],
@@ -170,11 +249,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget _settingItem({
     required IconData icon,
     required String title,
-    required Widget child
+    required Widget child,
+    required bool isDark
   }) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    final isDark = themeProvider.isDarkTheme;
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       child: Row(
@@ -198,4 +275,40 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
     );
   }
+
+  Widget _developerInfoRow(
+    String label,
+    String value,
+    bool isDark,
+  ) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                label,
+                style: TextStyle(
+                  color: AppColors.textSecondary(isDark),
+                  fontSize: 12,
+                ),
+              ),
+              SizedBox(height: 2),
+              Text(
+                value,
+                style: TextStyle(
+                  color: AppColors.textPrimary(isDark),
+                  fontSize: 14,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
 }
+
+
