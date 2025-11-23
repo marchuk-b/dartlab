@@ -1,5 +1,5 @@
 name: photo_editor
-description: "A new Flutter project."
+description: "App for photo editing"
 publish_to: 'none'
 version: 0.1.0
 
@@ -31,6 +31,31 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.1
+
+flutter_launcher_icons:
+  android: true
+  background_color_android: "#ffffff"
+  ios: true
+  remove_alpha_ios: true
+  background_color_ios: "#ffffff"
+  image_path: "assets/images/logo.png"
+
+  # Для Windows
+  windows:
+    generate: true
+    image_path: "assets/images/logo.png"
+    icon_size: 48
+
+  # Для Linux
+  linux:
+    generate: true
+    image_path: "assets/images/logo.png"
+
+  # Для Web
+  web:
+    generate: true
+    image_path: "assets/images/logo.png"
 
 flutter:
   uses-material-design: true
