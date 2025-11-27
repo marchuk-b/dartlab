@@ -1,66 +1,116 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:image/image.dart' as img;
+import 'package:photo_editor/providers/theme_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:photo_editor/constants/app_colors.dart';
 
 class PixelColorImage {
-  Future show(BuildContext context, {Color? backgroundColor, Uint8List? image, onPick}) {
-    return showDialog(
+  Future show(
+    BuildContext context, {
+    Color? backgroundColor,
+    Uint8List? image,
+    Function(Color)? onPick,
+  }) {
+    final isDark = Provider.of<ThemeProvider>(context, listen: false).isDarkTheme;
+
+    return showModalBottomSheet(
       context: context,
-      builder: (BuildContext context) {
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
         Color tempColor = backgroundColor!;
         return StatefulBuilder(
           builder: (context, setState) {
-            return AlertDialog(
-              title: const Text("Pick a color"),
-              content: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.8,
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      _ImageColorPicker(
-                        imageBytes: image!,
-                        onColorChanged: (color) {
-                          setState(() {
-                            tempColor = color;
-                          });
-                        },
+            return Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: isDark ? Colors.grey[850] : Colors.white,
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+              ),
+              child: SafeArea(
+                top: false,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Handle
+                    Container(
+                      width: 40,
+                      height: 5,
+                      margin: const EdgeInsets.only(bottom: 12),
+                      decoration: BoxDecoration(
+                        color: isDark ? Colors.grey.shade700 : Colors.grey.shade400,
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      const SizedBox(height: 10),
-                      Container(
-                        width: double.infinity,
-                        height: 60,
-                        decoration: BoxDecoration(
-                          color: tempColor,
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: Colors.white, width: 2),
+                    ),
+
+                    // Image picker
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.45,
+                      child: ClipRRect(
+                        child: _ImageColorPicker(
+                          imageBytes: image!,
+                          onColorChanged: (color) {
+                            setState(() => tempColor = color);
+                          },
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+
+                    const SizedBox(height: 16),
+
+                    // Color preview box
+                    Container(
+                      width: double.infinity,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        color: tempColor,
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                          color: isDark ? Colors.white70 : Colors.black,
+                          width: 2,
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 16),
+
+                    // Buttons
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: Text(
+                              "Cancel",
+                              style: TextStyle(color: AppColors.textPrimary(isDark),),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: TextButton(
+                            onPressed: () {
+                              onPick?.call(tempColor);
+                              Navigator.pop(context);
+                            },
+                            child: Text(
+                              "Pick",
+                              style: TextStyle(color: AppColors.textPrimary(isDark),),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
                 ),
               ),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text("Cancel")
-                ),
-                TextButton(
-                  onPressed: () {
-                    onPick(tempColor);
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text("Pick")
-                ),
-              ],
             );
-          }
+          },
         );
-      }
+      },
     );
   }
+
 }
 
 class _ImageColorPicker extends StatefulWidget {
@@ -149,9 +199,11 @@ class _ImageColorPickerState extends State<_ImageColorPicker> {
         },
         child: Stack(
           children: [
-            Image.memory(
-              widget.imageBytes,
-              fit: BoxFit.contain,
+            Center(
+              child: FittedBox(
+                fit: BoxFit.contain,
+                child: Image.memory(widget.imageBytes),
+              ),
             ),
             if (_touchPosition != null)
               Positioned(
