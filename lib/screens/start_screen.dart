@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:photo_editor/constants/app_colors.dart';
@@ -32,77 +31,127 @@ class _StartScreenState extends State<StartScreen> {
 
     return Scaffold(
       body: Container(
-        color: AppColors.backgroundColor(isDark),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 40),
-                child: Image.asset('assets/images/logo_with_label2.png', width: 250,),
-              ),
-            ),
-            Expanded(
-              child: Center(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/bg_start_screen.png"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              // Верхня панель замість AppBar
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     _circleButton(
+                      icon: Icons.info,
+                      label: "About",
                       onPressed: () {
-                        AppImagePicker(source: ImageSource.gallery)
-                          .pick(onPick: (File? image){
+                        Navigator.of(context).pushNamed('/about');
+                      },
+                    ),
+                    _circleButton(
+                      icon: Icons.settings,
+                      label: "Settings",
+                      onPressed: () {
+                        Navigator.of(context).pushNamed('/settings');
+                      }
+                    ),
+                  ],
+                ),
+              ),
+
+              // Логотип
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 30),
+                child: Center(
+                  child: Container(
+                    // decoration: BoxDecoration(
+                    //     // borderRadius: BorderRadius.circular(10),
+                    //     color: Colors.black38
+                    // ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 90, vertical: 20),
+                      child: Image.asset(
+                        'assets/images/logos.png',
+                        width: 240,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+              // Кнопки
+              Padding(
+                padding: const EdgeInsets.only(top: 40, bottom: 40),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    if (PlatformHelper.isCameraSupported)
+                      ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.black45,
+                          padding: EdgeInsets.symmetric(horizontal: 28, vertical: 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        onPressed: () {
+                          AppImagePicker(source: ImageSource.camera)
+                              .pick(onPick: (File? image){
                             imageProvider.changeImageFile(image!);
                             Navigator.of(context).pushReplacementNamed('/home');
                           }
-                        );
-                      },
-                      icon: Icons.backup_outlined,
-                      label: "Gallery",
-                    ),
+                          );
+                        },
+                        icon: Icon(Icons.camera_alt, size: 40, color: AppColors.iconColor(isDark)),
+                        label: Text(
+                          "CAMERA",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: AppColors.textSecondary(isDark),
+                          ),
+                        ),
+                      ),
+
                     if (PlatformHelper.isCameraSupported)
-                    _circleButton(
+                      SizedBox(height: 12),
+
+                    ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black45,
+                        padding: EdgeInsets.symmetric(horizontal: 28, vertical: 12),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
                       onPressed: () {
-                        AppImagePicker(source: ImageSource.camera)
+                        AppImagePicker(source: ImageSource.gallery)
                             .pick(onPick: (File? image){
                           imageProvider.changeImageFile(image!);
                           Navigator.of(context).pushReplacementNamed('/home');
                         }
                         );
                       },
-                      icon: Icons.camera,
-                      label: "Camera",
+                      icon: Icon(Icons.photo_library, size: 40, color: AppColors.iconColor(isDark)),
+                      label: Text(
+                        "GALLERY",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: AppColors.textSecondary(isDark),
+                        ),
+                      ),
                     ),
                   ],
-                )
-              )
-           ),
-          ],
-        ),
-      ),
-      bottomNavigationBar: Container(
-        height: 80,
-        color: AppColors.bottomBarColor(isDark),
-        child: SafeArea(
-          child: Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                TextButton.icon(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed('/settings');
-                  },
-                  icon: Icon(Icons.settings, color: AppColors.iconColor(isDark)),
-                  label: Text("Settings", style: TextStyle(color: AppColors.textSecondary(isDark))),
                 ),
-                TextButton.icon(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed('/about');
-                  },
-                  icon: Icon(Icons.question_mark, color: AppColors.iconColor(isDark)),
-                  label: Text("About", style: TextStyle(color: AppColors.textSecondary(isDark))),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
@@ -114,47 +163,33 @@ class _StartScreenState extends State<StartScreen> {
     required String label,
     required VoidCallback onPressed,
   }) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    final isDark = themeProvider.isDarkTheme;
-
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: 100,
-          height: 100,
-          decoration: BoxDecoration(
-            color: AppColors.secondaryColor(isDark),
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                blurRadius: 10,
-                offset: Offset(0, 4),
-              ),
-            ],
-          ),
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              onTap: onPressed,
-              customBorder: CircleBorder(),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+      child: InkWell(
+        onTap: onPressed,
+        customBorder: CircleBorder(),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(
+              width: 36,
+              height: 36,
               child: Center(
-                child: Icon(icon, size: 48, color: Colors.white),
+                child: Icon(icon, size: 36, color: Colors.white),
               ),
             ),
-          ),
+            Text(
+              label,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 16,
+                color: AppColors.darkTextSecondary,
+              ),
+            ),
+          ],
         ),
-        const SizedBox(height: 10),
-        Text(
-          label,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 14,
-            color: AppColors.textSecondary(isDark),
-          ),
-        ),
-      ],
+      ),
     );
   }
 }

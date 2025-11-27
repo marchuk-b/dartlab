@@ -78,13 +78,13 @@ class _TextScreenState extends State<TextScreen> {
                       showEditor = true;
                     });
                   },
-                  child: const Row(
+                  child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(Icons.add, color: Colors.white,),
+                      Icon(Icons.add, color: AppColors.textPrimary(isDark),),
                       Text('Add Text',
                         style: TextStyle(
-                            color: Colors.white
+                          color: AppColors.textPrimary(isDark),
                         ),
                       )
                     ],
