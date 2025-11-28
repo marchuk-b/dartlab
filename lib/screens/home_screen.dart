@@ -175,12 +175,11 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       bottomNavigationBar: Container(
         width: double.infinity,
-        height: 90,
+        height: 80 + MediaQuery.of(context).padding.bottom,
         color: AppColors.bottomBarColor(isDark),
         child: SafeArea(
           child: Center(
             child: SingleChildScrollView(
-              padding: EdgeInsetsGeometry.directional(top: 7),
               scrollDirection: Axis.horizontal,
               child: Center(
                 child: Row(

@@ -43,7 +43,10 @@ class _AboutScreenState extends State<AboutScreen> {
               Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Image.asset('assets/images/logo_with_label824.png', width: 200),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Image.asset('assets/images/logos.png', width: 150),
+                  ),
                   Text("Where every photo becomes a masterpiece.",
                     style: TextStyle(color: AppColors.textSecondary(isDark)),
                   ),

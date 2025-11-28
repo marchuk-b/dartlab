@@ -80,36 +80,39 @@ class _DrawScreenState extends State<DrawScreen> {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: 20,
-                        child: Center(
-                          child: Icon(
-                            Icons.circle,
-                            color: Colors.white,
-                            size: _controller.thickness + 3,
+            child: Container(
+              color: AppColors.secondaryColor(isDark),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 20,
+                          child: Center(
+                            child: Icon(
+                              Icons.circle,
+                              color: AppColors.iconColor(isDark),
+                              size: _controller.thickness + 3,
+                            ),
                           ),
                         ),
-                      ),
-                      Expanded(
-                        child: slider(
-                          value: _controller.thickness,
-                          onChanged: (value) {
-                            setState(() {
-                              _controller.thickness = value;
-                            });
-                          }
+                        Expanded(
+                          child: slider(
+                            value: _controller.thickness,
+                            onChanged: (value) {
+                              setState(() {
+                                _controller.thickness = value;
+                              });
+                            }
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           )
@@ -117,7 +120,7 @@ class _DrawScreenState extends State<DrawScreen> {
       ),
       bottomNavigationBar: Container(
         width: double.infinity,
-        height: 80,
+        height: 60 + MediaQuery.of(context).padding.bottom,
         color: AppColors.bottomBarColor(isDark), // Bottom navigation bar color
         child: SafeArea(
           child: Row(
@@ -200,6 +203,8 @@ class _DrawScreenState extends State<DrawScreen> {
       max: 20,
       min: 1,
       activeColor: AppColors.activeSlider,
+      thumbColor: AppColors.activeSlider,
+      inactiveColor: Colors.black26,
     );
   }
 

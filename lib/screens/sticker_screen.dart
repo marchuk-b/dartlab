@@ -70,7 +70,7 @@ class _StickerScreenState extends State<StickerScreen> {
       ),
       bottomNavigationBar: Container(
         width: double.infinity,
-        height: 140,
+        height: 120 + MediaQuery.of(context).padding.bottom,
         color: AppColors.bottomBarColor(isDark),
         child: SafeArea(
           child: Column(

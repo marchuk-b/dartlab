@@ -78,7 +78,7 @@ class _FilterScreenState extends State<FilterScreen> {
       ),
       bottomNavigationBar: Container(
         width: double.infinity,
-        height: 110,
+        height: 100 + MediaQuery.of(context).padding.bottom,
         color: AppColors.bottomBarColor(isDark),
         child: SafeArea(
           child: Center(  

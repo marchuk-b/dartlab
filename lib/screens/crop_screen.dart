@@ -76,7 +76,7 @@ class _CropScreenState extends State<CropScreen> {
       ),
       bottomNavigationBar: Container(
         width: double.infinity,
-        height: 60,
+        height: 60 + MediaQuery.of(context).padding.bottom,
         color: AppColors.bottomBarColor(isDark),
         child: SafeArea(
           child: Center(
@@ -88,7 +88,7 @@ class _CropScreenState extends State<CropScreen> {
                     child: Icon(
                       Icons.rotate_90_degrees_ccw_outlined,
                       color: AppColors.iconColor(isDark),
-                    ), 
+                    ),
                     onPress: () {
                       controller.rotateLeft();
                     }
@@ -97,8 +97,8 @@ class _CropScreenState extends State<CropScreen> {
                     child: Icon(
                       Icons.rotate_90_degrees_cw_outlined,
                       color: AppColors.iconColor(isDark),
-                    ), 
-                    onPress: () { 
+                    ),
+                    onPress: () {
                       controller.rotateRight();
                     }
                   ),
@@ -112,9 +112,9 @@ class _CropScreenState extends State<CropScreen> {
                   ),
                   _bottomBatItem(
                     child: Text(
-                      "Free", 
+                      "Free",
                       style: TextStyle(color: AppColors.textPrimary(isDark))
-                    ),  
+                    ),
                     onPress: () {
                       controller.aspectRatio = null;
                       controller.crop = const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9);
@@ -122,9 +122,9 @@ class _CropScreenState extends State<CropScreen> {
                   ),
                   _bottomBatItem(
                     child: Text(
-                      "Square", 
+                      "Square",
                       style: TextStyle(color: AppColors.textPrimary(isDark))
-                    ),  
+                    ),
                     onPress: () {
                       controller.aspectRatio = 1;
                       controller.crop = const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9);
@@ -132,9 +132,9 @@ class _CropScreenState extends State<CropScreen> {
                   ),
                   _bottomBatItem(
                     child: Text(
-                      "1:2", 
+                      "1:2",
                       style: TextStyle(color: AppColors.textPrimary(isDark))
-                    ),  
+                    ),
                     onPress: () {
                       controller.aspectRatio = 1 / 2;
                       controller.crop = const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9);
@@ -142,9 +142,9 @@ class _CropScreenState extends State<CropScreen> {
                   ),
                   _bottomBatItem(
                     child: Text(
-                      "3:4", 
+                      "3:4",
                       style: TextStyle(color: AppColors.textPrimary(isDark))
-                    ),  
+                    ),
                     onPress: () {
                       controller.aspectRatio = 3 / 4;
                       controller.crop = const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9);
@@ -152,9 +152,9 @@ class _CropScreenState extends State<CropScreen> {
                   ),
                   _bottomBatItem(
                     child: Text(
-                      "4:5", 
+                      "4:5",
                       style: TextStyle(color: AppColors.textPrimary(isDark))
-                    ),  
+                    ),
                     onPress: () {
                       controller.aspectRatio = 4 / 5;
                       controller.crop = const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9);
@@ -162,20 +162,20 @@ class _CropScreenState extends State<CropScreen> {
                   ),
                   _bottomBatItem(
                     child: Text(
-                      "9:16", 
+                      "9:16",
                       style: TextStyle(color: AppColors.textPrimary(isDark))
-                    ),  
+                    ),
                     onPress: () {
                       controller.aspectRatio = 9 / 16;
                       controller.crop = const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9);
                     }
                   ),
-            
+
                   _bottomBatItem(
                     child: Text(
-                      "2:1", 
+                      "2:1",
                       style: TextStyle(color: AppColors.textPrimary(isDark))
-                    ),  
+                    ),
                     onPress: () {
                       controller.aspectRatio = 2 / 1;
                       controller.crop = const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9);
@@ -183,9 +183,9 @@ class _CropScreenState extends State<CropScreen> {
                   ),
                   _bottomBatItem(
                     child: Text(
-                      "4:3", 
+                      "4:3",
                       style: TextStyle(color: AppColors.textPrimary(isDark))
-                    ),  
+                    ),
                     onPress: () {
                       controller.aspectRatio = 4 / 3;
                       controller.crop = const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9);
@@ -193,9 +193,9 @@ class _CropScreenState extends State<CropScreen> {
                   ),
                   _bottomBatItem(
                     child: Text(
-                      "5:4", 
+                      "5:4",
                       style: TextStyle(color: AppColors.textPrimary(isDark))
-                    ),  
+                    ),
                     onPress: () {
                       controller.aspectRatio = 5 / 4;
                       controller.crop = const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9);
@@ -203,9 +203,9 @@ class _CropScreenState extends State<CropScreen> {
                   ),
                   _bottomBatItem(
                     child: Text(
-                      "16:9", 
+                      "16:9",
                       style: TextStyle(color: AppColors.textPrimary(isDark))
-                    ),  
+                    ),
                     onPress: () {
                       controller.aspectRatio = 16 / 9;
                       controller.crop = const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9);

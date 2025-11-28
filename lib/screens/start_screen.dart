@@ -5,7 +5,6 @@ import 'package:photo_editor/constants/app_colors.dart';
 import 'package:photo_editor/helper/app_image_picker.dart';
 import 'package:photo_editor/helper/platform_helper.dart';
 import 'package:photo_editor/providers/app_image_provider.dart';
-import 'package:photo_editor/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class StartScreen extends StatefulWidget {
@@ -26,9 +25,6 @@ class _StartScreenState extends State<StartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    final isDark = themeProvider.isDarkTheme;
-
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -64,7 +60,7 @@ class _StartScreenState extends State<StartScreen> {
                   ],
                 ),
               ),
-
+      
               // Логотип
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 30),
@@ -84,7 +80,7 @@ class _StartScreenState extends State<StartScreen> {
                   ),
                 ),
               ),
-
+      
               // Кнопки
               Padding(
                 padding: const EdgeInsets.only(top: 40, bottom: 40),
@@ -108,20 +104,20 @@ class _StartScreenState extends State<StartScreen> {
                           }
                           );
                         },
-                        icon: Icon(Icons.camera_alt, size: 40, color: AppColors.iconColor(isDark)),
+                        icon: Icon(Icons.camera_alt, size: 40, color: AppColors.darkIcon),
                         label: Text(
                           "CAMERA",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 20,
-                            color: AppColors.textSecondary(isDark),
+                            color: AppColors.darkTextPrimary,
                           ),
                         ),
                       ),
-
+      
                     if (PlatformHelper.isCameraSupported)
                       SizedBox(height: 12),
-
+      
                     ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.black45,
@@ -138,13 +134,13 @@ class _StartScreenState extends State<StartScreen> {
                         }
                         );
                       },
-                      icon: Icon(Icons.photo_library, size: 40, color: AppColors.iconColor(isDark)),
+                      icon: Icon(Icons.photo_library, size: 40, color: AppColors.darkIcon),
                       label: Text(
                         "GALLERY",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 20,
-                          color: AppColors.textSecondary(isDark),
+                          color: AppColors.darkTextPrimary,
                         ),
                       ),
                     ),
@@ -176,7 +172,7 @@ class _StartScreenState extends State<StartScreen> {
               width: 36,
               height: 36,
               child: Center(
-                child: Icon(icon, size: 36, color: Colors.white),
+                child: Icon(icon, size: 36, color: AppColors.darkIcon),
               ),
             ),
             Text(
@@ -184,7 +180,7 @@ class _StartScreenState extends State<StartScreen> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,
-                color: AppColors.darkTextSecondary,
+                color: AppColors.darkTextPrimary,
               ),
             ),
           ],

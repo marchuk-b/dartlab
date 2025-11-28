@@ -23,7 +23,7 @@ class _MaskScreenState extends State<MaskScreen> {
 
   Uint8List? currentImage;
 
-  BlendMode blendmode = BlendMode.dstIn;
+  BlendMode blendMode = BlendMode.dstIn;
   IconData iconData = Shapes().list()[0];
 
   double opacity = 1;
@@ -65,7 +65,7 @@ class _MaskScreenState extends State<MaskScreen> {
                   return Screenshot(
                     controller: screenshotController,
                     child: WidgetMask(
-                      blendMode: blendmode,
+                      blendMode: blendMode,
                       childSaveLayer: true,
                       mask: Stack(
                         children: [
@@ -91,7 +91,7 @@ class _MaskScreenState extends State<MaskScreen> {
       ),
       bottomNavigationBar: Container(
         width: double.infinity,
-        height: 110,
+        height: 110 + MediaQuery.of(context).padding.bottom,
         color: AppColors.bottomBarColor(isDark),
         child: SafeArea(
           child: Column(
@@ -108,7 +108,7 @@ class _MaskScreenState extends State<MaskScreen> {
                           onPressed: (){
                             setState(() {
                               opacity = 1;
-                              blendmode = BlendMode.dst;
+                              blendMode = BlendMode.dst;
                             });
                           },
                           child: Text('DstIn',
@@ -118,7 +118,7 @@ class _MaskScreenState extends State<MaskScreen> {
                         TextButton(
                           onPressed: (){
                             setState(() {
-                              blendmode = BlendMode.overlay;
+                              blendMode = BlendMode.overlay;
                             });
                           },
                           child: Text('Overlay',
@@ -128,7 +128,7 @@ class _MaskScreenState extends State<MaskScreen> {
                         TextButton(
                           onPressed: (){
                             setState(() {
-                              blendmode = BlendMode.screen;
+                              blendMode = BlendMode.screen;
                               opacity = .7;
                             });
                           },
@@ -139,7 +139,7 @@ class _MaskScreenState extends State<MaskScreen> {
                         TextButton(
                           onPressed: (){
                             setState(() {
-                              blendmode = BlendMode.saturation;
+                              blendMode = BlendMode.saturation;
                             });
                           },
                           child: Text('Saturation',
@@ -149,7 +149,7 @@ class _MaskScreenState extends State<MaskScreen> {
                         TextButton(
                           onPressed: (){
                             setState(() {
-                              blendmode = BlendMode.difference;
+                              blendMode = BlendMode.difference;
                             });
                           },
                           child: Text('Difference',
@@ -196,7 +196,7 @@ class _MaskScreenState extends State<MaskScreen> {
         onPress();
       }, 
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: EdgeInsets.symmetric(horizontal: 8),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

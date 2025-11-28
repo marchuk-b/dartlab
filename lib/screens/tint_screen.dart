@@ -73,25 +73,28 @@ class _TintScreenState extends State<TintScreen> {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                slider(
-                  value: tints[index].opacity,
-                  onChanged: (value) {
-                    setState(() {
-                      tints[index].opacity = value;
-                    });
-                  }
-                ),
-              ],
+            child: Container(
+              color: AppColors.secondaryColor(isDark),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  slider(
+                    value: tints[index].opacity,
+                    onChanged: (value) {
+                      setState(() {
+                        tints[index].opacity = value;
+                      });
+                    }
+                  ),
+                ],
+              ),
             )
           ),
         ],
       ),
       bottomNavigationBar: Container(
         width: double.infinity,
-        height: 80,
+        height: 60 + MediaQuery.of(context).padding.bottom,
         color: AppColors.bottomBarColor(isDark),
         child: SafeArea(
           child: Center(
@@ -141,6 +144,8 @@ class _TintScreenState extends State<TintScreen> {
       max: 1.0,
       min: 0.0,
       activeColor: AppColors.activeSlider,
+      thumbColor: AppColors.activeSlider,
+      inactiveColor: Colors.black26,
     );
   }
 }

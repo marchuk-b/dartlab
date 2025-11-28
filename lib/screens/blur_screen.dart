@@ -76,50 +76,59 @@ class _BlurScreenState extends State<BlurScreen> {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Row(
-                    children: [
-                      Text("X:",
-                        style: TextStyle(
-                          color: AppColors.textPrimary(isDark)
-                        ) 
-                      ),
-                      Expanded(
-                        child: slider(
-                          value: sigmaX,
-                          onChanged: (value) {
-                            setState(() {
-                              sigmaX = value;
-                            });
-                          }
+            child: Container(
+              color: AppColors.secondaryColor(isDark),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      children: [
+                        Text("X:",
+                          style: TextStyle(
+                            color: AppColors.textSecondary(isDark)
+                          )
                         ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text("Y: ",
-                        style: TextStyle(
-                          color: AppColors.textPrimary(isDark)
-                        ) 
-                      ),
-                      Expanded(
-                        child: slider(
-                          value: sigmaY,
-                          onChanged: (value) {
-                            setState(() {
-                              sigmaY = value;
-                            });
-                          }
+                        Expanded(
+                          child: slider(
+                            value: sigmaX,
+                            onChanged: (value) {
+                              setState(() {
+                                sigmaX = value;
+                              });
+                            },
+                            onReset: () {
+                              setState(() => sigmaX = 0);
+                            },
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text("Y:",
+                          style: TextStyle(
+                            color: AppColors.textSecondary(isDark)
+                          )
+                        ),
+                        Expanded(
+                          child: slider(
+                            value: sigmaY,
+                            onChanged: (value) {
+                              setState(() {
+                                sigmaY = value;
+                              });
+                            },
+                            onReset: () {
+                              setState(() => sigmaY = 0);
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             )
           ),
@@ -127,7 +136,7 @@ class _BlurScreenState extends State<BlurScreen> {
       ),
       bottomNavigationBar: Container(
         width: double.infinity,
-        height: 80,
+        height: 60 + MediaQuery.of(context).padding.bottom,
         color: AppColors.bottomBarColor(isDark),
         child: SafeArea(
           child: Center(
@@ -206,14 +215,19 @@ class _BlurScreenState extends State<BlurScreen> {
     );
   }
 
-  Widget slider({value, onChanged}){
-    return Slider(
-      label: '${value.toStringAsFixed(2)}',
-      value: value, 
-      onChanged: onChanged,
-      max: 10.0,
-      min: 0.0,
-      activeColor: AppColors.activeSlider,
+  Widget slider({value, onChanged, onReset}){
+    return GestureDetector(
+      onDoubleTap: onReset,
+      child: Slider(
+        label: '${value.toStringAsFixed(2)}',
+        value: value,
+        onChanged: onChanged,
+        max: 10.0,
+        min: 0.0,
+        activeColor: AppColors.activeSlider,
+        thumbColor: AppColors.activeSlider,
+        inactiveColor: Colors.black26,
+      ),
     );
   }
 }

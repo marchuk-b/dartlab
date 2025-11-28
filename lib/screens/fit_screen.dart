@@ -156,7 +156,7 @@ class _FitScreenState extends State<FitScreen> {
 
       bottomNavigationBar: Container(
         width: double.infinity,
-        height: 130,
+        height: 120 + MediaQuery.of(context).padding.bottom,
         color: AppColors.bottomBarColor(isDark), // Bottom navigation bar color
         child: SafeArea(
           child: Column(
@@ -392,16 +392,16 @@ class _FitScreenState extends State<FitScreen> {
                     backgroundImage = await image!.readAsBytesSync();
                     setState(() {});
                   });
-              }, 
+              },
               icon: Icon(
-                Icons.photo_library_outlined, 
+                Icons.photo_library_outlined,
                 color: AppColors.iconColor(isDark)
               )
             ),
             Expanded(
               child: Slider(
                 label: blur.toStringAsFixed(2),
-                value: blur, 
+                value: blur,
                 onChanged: (value){
                   setState(() {
                     blur = value;
@@ -410,6 +410,8 @@ class _FitScreenState extends State<FitScreen> {
                 max: 100,
                 min: 0,
                 activeColor: AppColors.activeSlider,
+                thumbColor: AppColors.activeSlider,
+                inactiveColor: Colors.black26,
               ),
             ),
           ],
@@ -487,8 +489,8 @@ class _FitScreenState extends State<FitScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    width: 40,
-                    height: 40,
+                    width: 45,
+                    height: 45,
                     child: FittedBox(
                       fit: BoxFit.fill,
                       child: InkWell(

@@ -42,7 +42,7 @@ class MainApp extends StatelessWidget {
           title: "DartLab",
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-            primarySwatch: Colors.blue,
+            primarySwatch: Colors.deepPurple,
             scaffoldBackgroundColor: AppColors.backgroundColor(isDark), // Default background color
 
             appBarTheme: AppBarTheme(

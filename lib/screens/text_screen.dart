@@ -68,7 +68,7 @@ class _TextScreenState extends State<TextScreen> {
           ),
           bottomNavigationBar: Container(
             width: double.infinity,
-            height: 80,
+            height: 60 + MediaQuery.of(context).padding.bottom,
             color: AppColors.bottomBarColor(isDark),
             child: SafeArea(
               child: Center(
@@ -84,6 +84,7 @@ class _TextScreenState extends State<TextScreen> {
                       Icon(Icons.add, color: AppColors.textPrimary(isDark),),
                       Text('Add Text',
                         style: TextStyle(
+                          fontSize: 18,
                           color: AppColors.textPrimary(isDark),
                         ),
                       )
