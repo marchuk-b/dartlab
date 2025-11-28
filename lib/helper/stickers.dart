@@ -2,31 +2,31 @@ class Stickers {
   List<List<String>> list() {
     return [
       emoji(),
-      people(),
-      numbr(),
+      emoticon(),
+      dog(),
     ];
   }
 
   List<String> emoji() {
     List<String> list = [];
-    for (int i = 1; i <= 3; i++) {
+    for (int i = 1; i <= 11; i++) {
       list.add('assets/stickers/emodji_$i.png');
     }
     return list;
   }
 
-  List<String> people() {
+  List<String> emoticon() {
     List<String> list = [];
-    for (int i = 1; i <= 1; i++) {
-      list.add('assets/stickers/people_$i.png');
+    for (int i = 1; i <= 20; i++) {
+      list.add('assets/stickers/emoticon_$i.png');
     }
     return list;
   }
 
-  List<String> numbr() {
+  List<String> dog() {
     List<String> list = [];
-    for (int i = 1; i <= 1; i++) {
-      list.add('assets/stickers/numbers_$i.png');
+    for (int i = 1; i <= 19; i++) {
+      list.add('assets/stickers/dog_$i.png');
     }
     return list;
   }
