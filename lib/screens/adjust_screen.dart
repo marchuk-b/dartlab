@@ -1,12 +1,11 @@
 import 'dart:typed_data';
-import 'package:colorfilter_generator/addons.dart';
-import 'package:colorfilter_generator/colorfilter_generator.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_editor/constants/app_colors.dart';
+import 'package:photo_editor/helper/adjust_helper.dart';
 import 'package:photo_editor/providers/app_image_provider.dart';
 import 'package:photo_editor/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:screenshot/screenshot.dart';
+import 'package:image/image.dart' as img;
 
 class AdjustScreen extends StatefulWidget {
   const AdjustScreen({super.key});
@@ -17,48 +16,172 @@ class AdjustScreen extends StatefulWidget {
 
 class _AdjustScreenState extends State<AdjustScreen> {
   late AppImageProvider imageProvider;
-  ScreenshotController screenshotController = ScreenshotController();
-  late ColorFilterGenerator adj;
+  Uint8List? _originalImage;
+  Uint8List? _previewImage; // Зменшене зображення для preview
+  Uint8List? _processedPreview;
+  bool _isProcessing = false;
+  bool _isSaving = false;
 
   @override
   void initState() {
-    imageProvider = Provider.of<AppImageProvider>(context, listen: false);
-    adjust();
     super.initState();
+    imageProvider = Provider.of<AppImageProvider>(context, listen: false);
+    _originalImage = imageProvider.currentImage;
+    _initializePreview();
   }
 
-  double brightness = 0;
-  double saturation = 0;
-  double contrast = 0;
-  double hue = 0;
-  double sepia = 0;
+  // Створити зменшене зображення для швидкого preview
+  Future<void> _initializePreview() async {
+    if (_originalImage == null) return;
 
-  bool showBrightness = true;
+    final original = img.decodeImage(_originalImage!);
+    if (original == null) return;
+
+    // Зменшити до 800px по довшій стороні
+    final maxSize = 800;
+    img.Image preview;
+    
+    if (original.width > maxSize || original.height > maxSize) {
+      if (original.width > original.height) {
+        preview = img.copyResize(original, width: maxSize);
+      } else {
+        preview = img.copyResize(original, height: maxSize);
+      }
+    } else {
+      preview = original;
+    }
+
+    setState(() {
+      _previewImage = Uint8List.fromList(img.encodeJpg(preview, quality: 85));
+      _processedPreview = _previewImage;
+    });
+  }
+
+  // Параметри налаштувань
+  double _exposure = 0;
+  double _contrast = 0;
+  double _saturation = 0;
+  double _highlights = 0;
+  double _shadows = 0;
+  double _temperature = 0;
+  double _sharpness = 0;
+
+  // Видимість слайдерів
+  bool showExposure = true;
   bool showContrast = false;
   bool showSaturation = false;
-  bool showHue = false;
-  bool showSepia = false;
+  bool showHighlights = false;
+  bool showShadows = false;
+  bool showTemperature = false;
+  bool showSharpness = false;
 
-  void adjust({b, s, c, h, se}){
-    adj = ColorFilterGenerator(
-      name: "Adjust", 
-      filters: [
-        ColorFilterAddons.brightness(b ?? brightness),
-        ColorFilterAddons.contrast(c ?? contrast),
-        ColorFilterAddons.saturation(s ?? saturation),
-        ColorFilterAddons.hue(h ?? hue),
-        ColorFilterAddons.sepia(se ?? sepia),
-      ]
-    );
+  void showSlider({exp, con, sat, high, shad, temp, sharp}) {
+    setState(() {
+      showExposure = exp ?? false;
+      showContrast = con ?? false;
+      showSaturation = sat ?? false;
+      showHighlights = high ?? false;
+      showShadows = shad ?? false;
+      showTemperature = temp ?? false;
+      showSharpness = sharp ?? false;
+    });
   }
 
-  void showSlider({b, s, c, h, se}) {
+  // Швидкий preview на зменшеному зображенні
+  Future<void> _applyPreview() async {
+    if (_previewImage == null) return;
+    
+    setState(() => _isProcessing = true);
+
+    try {
+      final result = await ImageAdjustments.applyAdjustments(
+        _previewImage!,
+        exposure: _exposure,
+        contrast: _contrast,
+        saturation: _saturation,
+        highlights: _highlights,
+        shadows: _shadows,
+        temperature: _temperature,
+        sharpness: _sharpness,
+      );
+
+      setState(() {
+        _processedPreview = result;
+        _isProcessing = false;
+      });
+    } catch (e) {
+      print('Error processing preview: $e');
+      setState(() => _isProcessing = false);
+    }
+  }
+
+  // Застосувати до оригіналу при збереженні
+  Future<void> _applyToOriginal() async {
+    if (_originalImage == null) return;
+
+    setState(() => _isSaving = true);
+
+    try {
+      // Показуємо прогрес
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => WillPopScope(
+          onWillPop: () async => false,
+          child: AlertDialog(
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CircularProgressIndicator(),
+                SizedBox(height: 16),
+                Text('Processing full resolution...'),
+              ],
+            ),
+          ),
+        ),
+      );
+
+      // Обробляємо оригінал в повній якості
+      final result = await ImageAdjustments.applyAdjustments(
+        _originalImage!,
+        exposure: _exposure,
+        contrast: _contrast,
+        saturation: _saturation,
+        highlights: _highlights,
+        shadows: _shadows,
+        temperature: _temperature,
+        sharpness: _sharpness,
+      );
+
+      if (!mounted) return;
+      
+      Navigator.of(context).pop(); // Закрити діалог прогресу
+      imageProvider.changeImage(result);
+      Navigator.of(context).pop(); // Закрити екран
+      
+    } catch (e) {
+      print('Error processing original: $e');
+      if (mounted) {
+        Navigator.of(context).pop();
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error processing image')),
+        );
+      }
+    } finally {
+      setState(() => _isSaving = false);
+    }
+  }
+
+  void _resetAll() {
     setState(() {
-      showBrightness = b ?? false;  
-      showContrast = c ?? false;  
-      showSaturation = s ?? false; 
-      showHue = h ?? false; 
-      showSepia = se ?? false;  
+      _exposure = 0;
+      _contrast = 0;
+      _saturation = 0;
+      _highlights = 0;
+      _shadows = 0;
+      _temperature = 0;
+      _sharpness = 0;
+      _processedPreview = _previewImage;
     });
   }
 
@@ -70,248 +193,254 @@ class _AdjustScreenState extends State<AdjustScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(),
-        // title: Text("Adjust"),
         actions: [
           IconButton(
-            onPressed: () async{
-              Uint8List? bytes = await screenshotController.capture();
-              imageProvider.changeImage(bytes!);
-              if(!mounted) return;
-              Navigator.of(context).pop();  
-            }, 
-            icon: const Icon(Icons.done)
+            onPressed: _isSaving ? null : _applyToOriginal,
+            icon: const Icon(Icons.done),
           )
         ],
       ),
       body: Stack(
         children: [
           Center(
-            child: Consumer<AppImageProvider>(
-              builder: (BuildContext context, value, Widget? child) {
-                if (value.currentImage != null) {
-                  return Screenshot(
-                    controller: screenshotController,
-                    child: InteractiveViewer(
-                      minScale: 0.5,
-                      maxScale: 4.0,
-                      boundaryMargin: const EdgeInsets.all(10),
-                      panEnabled: true,  // Можливість переміщувати
-                      scaleEnabled: true,
-                      child: ColorFiltered(
-                        colorFilter: ColorFilter.matrix(adj.matrix),
-                        child: Image.memory(value.currentImage!),
-                      ),
-                    )
-                  );
-                }
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              },
-            ),
+            child: _processedPreview != null
+                ? InteractiveViewer(
+                    minScale: 0.5,
+                    maxScale: 4.0,
+                    boundaryMargin: const EdgeInsets.all(10),
+                    panEnabled: true,
+                    scaleEnabled: true,
+                    child: Image.memory(_processedPreview!),
+                  )
+                : const CircularProgressIndicator(),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Visibility(
-                        visible: showBrightness,
-                        child: slider(
-                          value: brightness,
-                          onChanged: (value){
-                            setState(() {
-                              brightness = value;
-                              adjust(b: brightness);
-                            });
-                          },
-                          onResetSlider: () {
-                            setState(() {
-                              brightness = 0;
-                              adjust(b: brightness);
-                            });
-                          },
-                        ),
-                      ),
-                      Visibility(
-                        visible: showContrast,
-                        child: slider(
-                          value: contrast,
-                          onChanged: (value){
-                            setState(() {
-                              contrast = value;
-                              adjust(c: contrast);
-                            });
-                          },
-                          onResetSlider: () {
-                            setState(() {
-                              contrast = 0;
-                              adjust(c: contrast);
-                            });
-                          },
-                        ),
-                      ),
-                      Visibility(
-                        visible: showSaturation,
-                        child: slider(
-                          value: saturation,
-                          onChanged: (value){
-                            setState(() {
-                              saturation = value;
-                              adjust(s: saturation);
-                            });
-                          },
-                          onResetSlider: () {
-                            setState(() {
-                              saturation = 0;
-                              adjust(s: saturation);
-                            });
-                          },
-                        ),
-                      ),
-                      Visibility(
-                        visible: showHue,
-                        child: slider(
-                          value: hue,
-                          onChanged: (value){
-                            setState(() {
-                              hue = value;
-                              adjust(h: hue);
-                            });
-                          },
-                          onResetSlider: () {
-                            setState(() {
-                              hue = 0;
-                              adjust(h: hue);
-                            });
-                          },
-                        ),
-                      ),
-                      Visibility(
-                        visible: showSepia,
-                        child: slider(
-                          value: sepia,
-                          onChanged: (value){
-                            setState(() {
-                              sepia = value;
-                              adjust(se: sepia);
-                            });
-                          },
-                          onResetSlider: () {
-                            setState(() {
-                              sepia = 0;
-                              adjust(se: sepia);
-                            });
-                          },
-                        ),
-                      ),
-                    ],
+          if (_isProcessing)
+            Positioned(
+              top: 16,
+              right: 16,
+              child: Container(
+                padding: EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.black54,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    color: Colors.white,
                   ),
                 ),
-                TextButton(
-                  onPressed: (){
-                    setState(() {
-                      brightness = 0;
-                      saturation = 0;
-                      contrast = 0;
-                      hue = 0;
-                      sepia = 0;
-                      adjust();
-                    });
-                  }, 
-                  child: Text("Reset all",
-                    style: TextStyle(
-                      color: AppColors.textPrimary(isDark),
-                    ),
-                  )
-                ),
-              ],
+              ),
             ),
-          ),          
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              color: AppColors.secondaryColor(isDark),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Visibility(
+                          visible: showExposure,
+                          child: _slider(
+                            value: _exposure,
+                            onChanged: (value) {
+                              setState(() => _exposure = value);
+                              _applyPreview();
+                            },
+                            onReset: () {
+                              setState(() => _exposure = 0);
+                              _applyPreview();
+                            },
+                          ),
+                        ),
+                        Visibility(
+                          visible: showContrast,
+                          child: _slider(
+                            value: _contrast,
+                            onChanged: (value) {
+                              setState(() => _contrast = value);
+                              _applyPreview();
+                            },
+                            onReset: () {
+                              setState(() => _contrast = 0);
+                              _applyPreview();
+                            },
+                          ),
+                        ),
+                        Visibility(
+                          visible: showSaturation,
+                          child: _slider(
+                            value: _saturation,
+                            onChanged: (value) {
+                              setState(() => _saturation = value);
+                              _applyPreview();
+                            },
+                            onReset: () {
+                              setState(() => _saturation = 0);
+                              _applyPreview();
+                            },
+                          ),
+                        ),
+                        Visibility(
+                          visible: showHighlights,
+                          child: _slider(
+                            value: _highlights,
+                            onChanged: (value) {
+                              setState(() => _highlights = value);
+                              _applyPreview();
+                            },
+                            onReset: () {
+                              setState(() => _highlights = 0);
+                              _applyPreview();
+                            },
+                          ),
+                        ),
+                        Visibility(
+                          visible: showShadows,
+                          child: _slider(
+                            value: _shadows,
+                            onChanged: (value) {
+                              setState(() => _shadows = value);
+                              _applyPreview();
+                            },
+                            onReset: () {
+                              setState(() => _shadows = 0);
+                              _applyPreview();
+                            },
+                          ),
+                        ),
+                        Visibility(
+                          visible: showTemperature,
+                          child: _slider(
+                            value: _temperature,
+                            onChanged: (value) {
+                              setState(() => _temperature = value);
+                              _applyPreview();
+                            },
+                            onReset: () {
+                              setState(() => _temperature = 0);
+                              _applyPreview();
+                            },
+                          ),
+                        ),
+                        Visibility(
+                          visible: showSharpness,
+                          child: _slider(
+                            value: _sharpness,
+                            min: 0,
+                            max: 1,
+                            onChanged: (value) {
+                              setState(() => _sharpness = value);
+                              _applyPreview();
+                            },
+                            onReset: () {
+                              setState(() => _sharpness = 0);
+                              _applyPreview();
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: _resetAll,
+                    child: Text(
+                      "Reset all",
+                      style: TextStyle(
+                        color: AppColors.textPrimary(isDark),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
       bottomNavigationBar: Container(
         width: double.infinity,
-        height: 80,
-        color: AppColors.bottomBarColor(isDark), // Bottom navigation bar color
+        height: 70 + MediaQuery.of(context).padding.bottom,
+        color: AppColors.bottomBarColor(isDark),
         child: SafeArea(
           child: Center(
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  _bottomBatItem(
-                    Icons.brightness_5, 
-                    "Brightness", 
-                    color: showBrightness ? AppColors.activeButton : null,
-                    onPress: () {
-                      showSlider(b: true);
-                    }
+                  _bottomBarItem(
+                    Icons.brightness_6,
+                    "Exposure",
+                    color: showExposure ? AppColors.activeButton : null,
+                    onPress: () => showSlider(exp: true),
                   ),
-                  _bottomBatItem(
-                    Icons.contrast, 
-                    "Contrast", 
+                  _bottomBarItem(
+                    Icons.contrast,
+                    "Contrast",
                     color: showContrast ? AppColors.activeButton : null,
-                    onPress: () {
-                      showSlider(c: true);
-                    }
+                    onPress: () => showSlider(con: true),
                   ),
-                  _bottomBatItem(
-                    Icons.filter_tilt_shift, 
+                  _bottomBarItem(
+                    Icons.filter_tilt_shift,
                     "Saturation",
-                    color: showSaturation? AppColors.activeButton : null, 
-                    onPress: () {
-                      showSlider(s: true);
-                    }
+                    color: showSaturation ? AppColors.activeButton : null,
+                    onPress: () => showSlider(sat: true),
                   ),
-                  _bottomBatItem(
-                    Icons.water_drop, 
-                    "Hue", 
-                    color: showHue ? AppColors.activeButton : null,
-                    onPress: () {
-                      showSlider(h: true);
-                    }
+                  _bottomBarItem(
+                    Icons.wb_sunny_outlined,
+                    "Highlights",
+                    color: showHighlights ? AppColors.activeButton : null,
+                    onPress: () => showSlider(high: true),
                   ),
-                  _bottomBatItem(
-                    Icons.motion_photos_on, 
-                    "Sepia", 
-                    color: showSepia ? AppColors.activeButton : null,
-                    onPress: () {
-                      showSlider(se: true);
-                    }
+                  _bottomBarItem(
+                    Icons.brightness_3,
+                    "Shadows",
+                    color: showShadows ? AppColors.activeButton : null,
+                    onPress: () => showSlider(shad: true),
                   ),
-                ]
+                  _bottomBarItem(
+                    Icons.thermostat,
+                    "Temperature",
+                    color: showTemperature ? AppColors.activeButton : null,
+                    onPress: () => showSlider(temp: true),
+                  ),
+                  _bottomBarItem(
+                    Icons.blur_off,
+                    "Sharpness",
+                    color: showSharpness ? AppColors.activeButton : null,
+                    onPress: () => showSlider(sharp: true),
+                  ),
+                ],
               ),
             ),
           ),
-        )
+        ),
       ),
     );
   }
 
-  Widget _bottomBatItem(IconData icon, String title, {Color? color, required onPress}) {
+  Widget _bottomBarItem(IconData icon, String title, {Color? color, required VoidCallback onPress}) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     final isDark = themeProvider.isDarkTheme;
 
     return InkWell(
-      onTap: () {
-        onPress();
-      }, 
+      onTap: onPress,
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 15),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
-              icon, 
+              icon,
               color: color ?? AppColors.iconColor(isDark),
             ),
             const SizedBox(height: 3),
             Text(
-              title, 
+              title,
               style: TextStyle(
                 color: color ?? AppColors.textSecondary(isDark),
               ),
@@ -322,16 +451,24 @@ class _AdjustScreenState extends State<AdjustScreen> {
     );
   }
 
-  Widget slider({value, onChanged, onResetSlider}){
+  Widget _slider({
+    required double value,
+    required Function(double) onChanged,
+    required VoidCallback onReset,
+    double min = -1,
+    double max = 1,
+  }) {
     return GestureDetector(
-      onDoubleTap: onResetSlider,
+      onDoubleTap: onReset,
       child: Slider(
-        label: '${value.toStringAsFixed(2)}',
+        label: value.toStringAsFixed(2),
         value: value,
         onChanged: onChanged,
-        max: 1,
-        min: -1,
+        max: max,
+        min: min,
         activeColor: AppColors.activeSlider,
+        thumbColor: AppColors.activeSlider,
+        inactiveColor: Colors.black26,
       ),
     );
   }
