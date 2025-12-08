@@ -65,17 +65,11 @@ class _StartScreenState extends State<StartScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 30),
                 child: Center(
-                  child: Container(
-                    // decoration: BoxDecoration(
-                    //     // borderRadius: BorderRadius.circular(10),
-                    //     color: Colors.black38
-                    // ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 90, vertical: 20),
-                      child: Image.asset(
-                        'assets/images/logos.png',
-                        width: 240,
-                      ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 90, vertical: 20),
+                    child: Image.asset(
+                      'assets/images/logos.png',
+                      width: 240,
                     ),
                   ),
                 ),
@@ -95,6 +89,7 @@ class _StartScreenState extends State<StartScreen> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
+                          minimumSize: Size(200, 70),
                         ),
                         onPressed: () {
                           AppImagePicker(source: ImageSource.camera)
@@ -125,6 +120,7 @@ class _StartScreenState extends State<StartScreen> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
+                        minimumSize: Size(200, 70),
                       ),
                       onPressed: () {
                         AppImagePicker(source: ImageSource.gallery)
