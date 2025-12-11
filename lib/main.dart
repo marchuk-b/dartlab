@@ -43,10 +43,10 @@ class MainApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             primarySwatch: Colors.deepPurple,
-            scaffoldBackgroundColor: AppColors.backgroundColor(isDark), // Default background color
+            scaffoldBackgroundColor: AppColors.backgroundColor(isDark),
 
             appBarTheme: AppBarTheme(
-              backgroundColor: AppColors.appBarColor(isDark), // Default app bar color
+              backgroundColor: AppColors.appBarColor(isDark),
               foregroundColor: AppColors.textPrimary(isDark),
               centerTitle: true,
               elevation: 0,
