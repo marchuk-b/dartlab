@@ -6,12 +6,12 @@
 [🇺🇸 English](README.md) | [🇺🇦 Українська](docs/README.uk.md)
 
 
-<div style="display: flex; gap: 5px;">
-  <img src="docs/screenshots/1.jpg" width="200" />
-  <img src="docs/screenshots/2.jpg" width="200" />
-  <img src="docs/screenshots/3.jpg" width="200" />
-  <img src="docs/screenshots/4.jpg" width="200" />
-  <img src="docs/screenshots/5.jpg" width="200" />
+<div style="overflow-x: auto; white-space: nowrap;">
+  <img src="docs/screenshots/1.jpg" width="196" style="display: inline-block;" />
+  <img src="docs/screenshots/2.jpg" width="200" style="display: inline-block;" />
+  <img src="docs/screenshots/3.jpg" width="200" style="display: inline-block;" />
+  <img src="docs/screenshots/4.jpg" width="200" style="display: inline-block;" />
+  <img src="docs/screenshots/5.jpg" width="200" style="display: inline-block;" />
 </div>
 
 ---

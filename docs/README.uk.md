@@ -5,12 +5,12 @@
 
 [🇺🇸 English](../README.md) | [🇺🇦 Українська](README.uk.md)
 
-<div style="display: flex; gap: 5px;">
-  <img src="screenshots/1.jpg" width="200" />
-  <img src="screenshots/2.jpg" width="200" />
-  <img src="screenshots/3.jpg" width="200" />
-  <img src="screenshots/4.jpg" width="200" />
-  <img src="screenshots/5.jpg" width="200" />
+<div style="overflow-x: auto; white-space: nowrap;">
+  <img src="screenshots/1.jpg" width="196" style="display: inline-block;" />
+  <img src="screenshots/2.jpg" width="200" style="display: inline-block;" />
+  <img src="screenshots/3.jpg" width="200" style="display: inline-block;" />
+  <img src="screenshots/4.jpg" width="200" style="display: inline-block;" />
+  <img src="screenshots/5.jpg" width="200" style="display: inline-block;" />
 </div>
 
 ---
