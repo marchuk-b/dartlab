@@ -1,10 +1,7 @@
-# Native folders (генеруються)
-android/
+# Native folders
 ios/
-windows/
 linux/
 macos/
-web/
 
 # Miscellaneous
 *.class
