@@ -1,6 +1,6 @@
 # DartLab (course work)
 
-![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20Windows-lightgrey)
+![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20Windows-green)
 
 [🇺🇸 English](README.md) | [🇺🇦 Українська](docs/README.uk.md)
 
@@ -43,8 +43,7 @@ A сross-platform photo editing application built with Flutter.
 
 ## Screenshots
 <div style="overflow-x: scroll; white-space: nowrap;">
-  <img src="docs/screenshots/1.jpg" width="200" style="display: inline-block;" />
-  <img src="docs/screenshots/2.jpg" width="200" style="display: inline-block;" />
+  <img src="docs/screenshots/1.jpg" width="196" style="display: inline-block;" />
   <img src="docs/screenshots/3.jpg" width="200" style="display: inline-block;" />
   <img src="docs/screenshots/4.jpg" width="200" style="display: inline-block;" />
   <img src="docs/screenshots/5.jpg" width="200" style="display: inline-block;" />
@@ -98,7 +97,7 @@ flutter build windows --release
 ## Developer
 **Bohdan Marchuk**
 - Email: marchukbohdan29@gmail.com
-- GitHub: [@marchuk-b](https://github.com/marchuk-b)
+- GitHub: [github.com/marchuk-b](https://github.com/marchuk-b)
 
 ---
 

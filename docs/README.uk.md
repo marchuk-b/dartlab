@@ -1,8 +1,8 @@
 # DartLab (курсова робота)
 
-![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20Windows-lightgrey)
+![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20Windows-green)
 
-[🇺🇦 Українська](docs/README.uk.md) | [🇺🇸 English](../README.md)
+[🇺🇦 Українська](README.uk.md) | [🇺🇸 English](../README.md)
 
 ## Про проєкт
 Кросплатформний застосунок для редагування фотографій, створений на Flutter.
@@ -44,7 +44,6 @@
 ## Скріншоти
 <div style="overflow-x: scroll; white-space: nowrap;">
   <img src="screenshots/1.jpg" width="196" style="display: inline-block;" />
-  <img src="screenshots/2.jpg" width="200" style="display: inline-block;" />
   <img src="screenshots/3.jpg" width="200" style="display: inline-block;" />
   <img src="screenshots/4.jpg" width="200" style="display: inline-block;" />
   <img src="screenshots/5.jpg" width="200" style="display: inline-block;" />
@@ -98,7 +97,7 @@ flutter build windows --release
 ## Розробник
 **Богдан Марчук**
 - Email: marchukbohdan29@gmail.com
-- GitHub: [@marchuk-b](https://github.com/marchuk-b)
+- GitHub: [github.com/marchuk-b](https://github.com/marchuk-b)
 
 ---
 
