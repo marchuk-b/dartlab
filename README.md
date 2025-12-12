@@ -1,24 +1,23 @@
 # DartLab (course work)
 
 ![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20Windows-lightgrey)
-![License](https://img.shields.io/badge/License-MIT-green)
 
 [🇺🇸 English](README.md) | [🇺🇦 Українська](docs/README.uk.md)
 
+## About
+A сross-platform photo editing application built with Flutter.
 
-<div style="overflow-x: auto; white-space: nowrap;">
-  <img src="docs/screenshots/1.jpg" width="196" style="display: inline-block;" />
-  <img src="docs/screenshots/2.jpg" width="200" style="display: inline-block;" />
-  <img src="docs/screenshots/3.jpg" width="200" style="display: inline-block;" />
-  <img src="docs/screenshots/4.jpg" width="200" style="display: inline-block;" />
-  <img src="docs/screenshots/5.jpg" width="200" style="display: inline-block;" />
-</div>
+## Table of Contents
+- [About](#about)
+- [Features](#features)
+- [Screenshots](#screenshots)
+- [Getting Started](#getting-started)
+- [Build for Production](#build-for-production)
+- [Developer](#developer)
 
----
-
-## App features
+## Features
 ### Editing Tools
-- **Crop**  Resize and crop images to desired dimensions
+- **Crop** - Resize and crop images to desired dimensions
 - **Filters** - Apply pre-built filters for quick enhancements
 - **Adjust** - Fine-tune image parameters:
   - Exposure
@@ -36,15 +35,20 @@
 - **Draw** - Freehand drawing on images
 - **Mask** - Apply masks for creative effects
 
-### Platform Support
-- **Mobile** (Android)
-- **Desktop** (Windows)
-
 ### Additional Features
 - **Dark/Light Theme** - Switch between themes
 - **Export Quality Settings** - Choose from 30%, 60%, 90%, or 100% quality
 - **Preview System** - Fast preview (800px) before full-resolution processing
 - **Cross-platform** - Single codebase for all platforms
+
+## Screenshots
+<div style="overflow-x: scroll; white-space: nowrap;">
+  <img src="docs/screenshots/1.jpg" width="200" style="display: inline-block;" />
+  <img src="docs/screenshots/2.jpg" width="200" style="display: inline-block;" />
+  <img src="docs/screenshots/3.jpg" width="200" style="display: inline-block;" />
+  <img src="docs/screenshots/4.jpg" width="200" style="display: inline-block;" />
+  <img src="docs/screenshots/5.jpg" width="200" style="display: inline-block;" />
+</div>
 
 ## Getting Started
 ### Prerequisites
@@ -71,7 +75,6 @@ flutter run
 
 # Desktop (Windows)
 flutter run -d windows
-
 ```
 
 ## Build for Production
@@ -95,6 +98,12 @@ flutter build windows --release
 ## Developer
 **Bohdan Marchuk**
 - Email: marchukbohdan29@gmail.com
-- GitHub: [github.com/marchuk-b](https://github.com/marchuk-b)
+- GitHub: [@marchuk-b](https://github.com/marchuk-b)
 
-Made with ❤️ using Flutter
+---
+
+<div align="center">
+  Made with ❤️ using Flutter
+  <br/>
+  <a href="#dartlab-course-work">⬆ Back to top</a>
+</div>

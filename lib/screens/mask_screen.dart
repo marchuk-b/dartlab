@@ -108,7 +108,7 @@ class _MaskScreenState extends State<MaskScreen> {
                           onPressed: (){
                             setState(() {
                               opacity = 1;
-                              blendMode = BlendMode.dst;
+                              blendMode = BlendMode.dstIn;
                             });
                           },
                           child: Text('DstIn',
