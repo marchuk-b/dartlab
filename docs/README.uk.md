@@ -53,7 +53,7 @@
 ### Необхідне ПЗ
 - Flutter SDK 3.0 або новіший  
 - Dart SDK 3.0 або новіший  
-- Android Studio / Visual Studio  
+- Android Studio / Visual Studio Code
 
 ### Встановлення
 1. **Клонування репозиторію**

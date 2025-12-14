@@ -53,7 +53,7 @@ A сross-platform photo editing application built with Flutter.
 ### Prerequisites
 - Flutter SDK 3.0 or higher
 - Dart SDK 3.0 or higher
-- Android Studio / Visual Studio
+- Android Studio / Visual Studio Code
 
 ### Installation
 1. **Clone the repository**
